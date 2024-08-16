@@ -15,6 +15,10 @@ GameObject:
   - component: {fileID: 1140926145601304267}
   - component: {fileID: 5487582202063905251}
   - component: {fileID: 1271565618602741216}
+  - component: {fileID: 3100300927541759960}
+  - component: {fileID: 6183090389333346445}
+  - component: {fileID: 5666060082066930348}
+  - component: {fileID: -5784096532638949843}
   m_Layer: 0
   m_Name: PlayerCharacter
   m_TagString: Untagged
@@ -128,6 +132,10 @@ MonoBehaviour:
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 1271565618602741216}
+  - {fileID: 3100300927541759960}
+  - {fileID: 6183090389333346445}
+  - {fileID: 5666060082066930348}
+  - {fileID: -5784096532638949843}
 --- !u!143 &5487582202063905251
 CharacterController:
   m_ObjectHideFlags: 0
@@ -170,3 +178,60 @@ MonoBehaviour:
   SyncParent: 0
   _autoAOIOverride: 1
   DisableSharedModeInterpolation: 0
+--- !u!114 &3100300927541759960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 974161794308657442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5407633ec9496d34c84f3441718baa7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerSpeed: 2
+  JumpForce: 5
+  GravityValue: -9.81
+  Camera: {fileID: 0}
+--- !u!114 &6183090389333346445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 974161794308657442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b18225944a6073b4d9ed2b899f97e19e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MeshRenderer: {fileID: 7475776747341331940}
+  _NetworkedColor: {r: 0, g: 0, b: 0, a: 0}
+--- !u!114 &5666060082066930348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 974161794308657442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 439f112fde87138439d1f70ca6467b3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _NetworkedHealth: 100
+--- !u!114 &-5784096532638949843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 974161794308657442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6732bec1e2d245f47b683fed4f80b0ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damage: 10
+  PlayerMovement: {fileID: 3100300927541759960}
