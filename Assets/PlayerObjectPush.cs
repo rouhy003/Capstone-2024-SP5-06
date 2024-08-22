@@ -8,6 +8,12 @@ public class PlayerObjectPush : NetworkBehaviour
     void OnControllerColliderHit(UnityEngine.ControllerColliderHit hit)
     {
         Rigidbody body = hit.collider.attachedRigidbody;
+        
+        // Requests the body's NetworkObject
+        if (body.GetComponent<NetworkObject>() != null)
+        {
+            body.GetComponent<NetworkObject>().RequestStateAuthority();
+        }
 
         if (body == null || body.isKinematic)
         {
