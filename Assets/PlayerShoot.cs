@@ -23,8 +23,7 @@ public class ProjectileShoot : NetworkBehaviour
             Runner.Spawn(projectile,
                 ray.origin,
                 Quaternion.identity,
-                Object.InputAuthority,
-                (runner, o) =>
+                onBeforeSpawned: (runner, o) =>
                 {
                     // Calls the projectile's "Init()" method to set its velocity.
                     o.GetComponent<PhysxBall>().Init(PlayerMovement.Camera.transform.forward * shootSpeed);
