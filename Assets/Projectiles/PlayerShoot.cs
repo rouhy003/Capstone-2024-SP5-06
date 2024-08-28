@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class ProjectileShoot : NetworkBehaviour
 {
-    public GameObject projectile;
     public float shootSpeed = 15f;
 
     public PlayerMovement PlayerMovement;

@@ -32,7 +32,10 @@ public class PlayerSpawner : NetworkBehaviour
     public void SpawnPlayer(PlayerRef player)
     {
         NetworkObject p = Runner.Spawn(PlayerPrefab, new Vector3(0, 1, 0), Quaternion.identity);
-        Canvas c = Instantiate(PlayerUI);
-        c.transform.SetParent(p.transform, false);
+        if (PlayerUI != null)
+        {
+            Canvas c = Instantiate(PlayerUI);
+            c.transform.SetParent(p.transform, false);
+        }
     }
 }
