@@ -11,6 +11,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FusionNetworking.unity
     guid: 8e4e7c01bb1b9ae43b6dcc8b07a10885
-  m_configObjects:
-    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 26d3707845b9ff54982ead8d3d9298e4, type: 2}
-    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 3048cb92b60ff4342b4bb0da0c6cb16b, type: 2}
+  m_configObjects: {}
