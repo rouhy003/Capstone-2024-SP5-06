@@ -11,4 +11,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FusionNetworking.unity
     guid: 8e4e7c01bb1b9ae43b6dcc8b07a10885
-  m_configObjects: {}
+  m_configObjects:
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 16077adcdbb0930449b708a082aaac7b, type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 715a7c74d7af6014a857aeca51e4b730, type: 2}
