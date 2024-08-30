@@ -10,18 +10,25 @@ public class StartMenu : MonoBehaviour
 
     private NetworkRunner _runnerInstance = null;
 
-    public void StartShared()
+    public void StartSharedPC()
     {
-        StartGame(GameMode.Shared, _LobbyID.text);
+        StartGame(GameMode.Shared, _LobbyID.text, false);
     }
 
-    private async void StartGame(GameMode mode, string roomName)
+    public void StartSharedVR()
+    {
+        StartGame(GameMode.Shared, _LobbyID.text, true);
+    }
+
+    private async void StartGame(GameMode mode, string roomName, bool isVR)
     {
         _runnerInstance = FindObjectOfType<NetworkRunner>();
         if (_runnerInstance == null)
         {
             _runnerInstance = Instantiate(_networkRunnerPrefab);
         }
+
+        _runnerInstance.GetComponent<LoadPCorVR>().isVR = isVR;
 
         // Let the Fusion Runner know that we will be providing user input
         _runnerInstance.ProvideInput = true;

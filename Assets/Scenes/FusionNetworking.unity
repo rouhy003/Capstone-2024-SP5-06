@@ -1042,8 +1042,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 871b1f192af926e48b9934e63c91e64a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerPrefab:
+  PCPlayerPrefab:
     RawGuidValue: 14ca453cf5dcb854a9c473a53f9a7275
+  VRPlayerPrefab:
+    RawGuidValue: 0418205a9b013824d801f061ff5d3cdd
   PlayerUI: {fileID: 0}
 --- !u!114 &1418241212
 MonoBehaviour:
