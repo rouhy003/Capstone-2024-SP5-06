@@ -4,10 +4,10 @@ using UnityEngine;
 public class PlayerSpawner : NetworkBehaviour
 {
     public NetworkPrefabRef PCPlayerPrefab;
-    public NetworkPrefabRef VRPlayerPrefab;
-    public Canvas PlayerUI;
     private GameController _gameStateController = null;
     private bool isVR;
+    public GameObject camera;
+    public GameObject VRRig;
     [Networked] private bool _gameIsReady { get; set; } = false;
 
 
@@ -35,19 +35,15 @@ public class PlayerSpawner : NetworkBehaviour
 
     public void SpawnPlayer(PlayerRef player)
     {
-        NetworkObject p;
-        if (isVR)
+        if (!isVR)
         {
-            p = Runner.Spawn(VRPlayerPrefab, new Vector3(0, 1, 0), Quaternion.identity);
+            Runner.Spawn(PCPlayerPrefab, new Vector3(0, 1, 0), Quaternion.identity);
         }
         else
         {
-            p = Runner.Spawn(PCPlayerPrefab, new Vector3(0, 1, 0), Quaternion.identity);
+            camera.SetActive(false);
+            VRRig.SetActive(true);
         }
-        if (PlayerUI != null)
-        {
-            Canvas c = Instantiate(PlayerUI);
-            c.transform.SetParent(p.transform, false);
-        }
+
     }
 }
