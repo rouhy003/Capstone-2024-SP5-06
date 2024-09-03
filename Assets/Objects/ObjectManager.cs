@@ -16,6 +16,8 @@ public class ObjectManager : NetworkBehaviour
             SpawnObject(Random.Range(5, -5), Random.Range(5, -5));
         }
     }
+
+    // Spawns an object at "x" and "y".
     public void SpawnObject(float x, float z)
     {
         Vector3 spawnPosition = new Vector3(x, 10, z);
@@ -23,7 +25,7 @@ public class ObjectManager : NetworkBehaviour
         currentObjects.Add(spawnedObject);
     }
 
-    //[Rpc(RpcSources.All, RpcTargets.StateAuthority)]
+    // Despawns the specified object and removes it from the list of current objects.
     public void DespawnObject(NetworkObject spawnedObject)
     {
         Runner.Despawn(spawnedObject);
