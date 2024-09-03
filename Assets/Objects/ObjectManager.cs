@@ -6,28 +6,27 @@ public class ObjectManager : NetworkBehaviour
 {
     public GameObject objectPrefab;
 
-    [SerializeField] private List<NetworkObject> currentObjects { get; set; }
+    private List<NetworkObject> currentObjects = new List<NetworkObject>();
     public const int ObjectLimit = 5;
 
     public override void FixedUpdateNetwork()
     {
-        // TODO: Insert spawning functionality here.
         if (currentObjects.Count < ObjectLimit)
         {
-            SpawnObject(Random.Range(10, -10), Random.Range(10, -10));
+            SpawnObject(Random.Range(5, -5), Random.Range(5, -5));
         }
-        Debug.Log(currentObjects.Count);
     }
     public void SpawnObject(float x, float z)
     {
-        Vector3 spawnPosition = new Vector3(x, 5f, z);
+        Vector3 spawnPosition = new Vector3(x, 10, z);
         NetworkObject spawnedObject = Runner.Spawn(objectPrefab, spawnPosition);
-        if (spawnedObject != null) currentObjects.Add(spawnedObject);
+        currentObjects.Add(spawnedObject);
     }
 
     //[Rpc(RpcSources.All, RpcTargets.StateAuthority)]
     public void DespawnObject(NetworkObject spawnedObject)
     {
         Runner.Despawn(spawnedObject);
+        currentObjects.Remove(spawnedObject);
     }
 }
