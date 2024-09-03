@@ -591,7 +591,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1010310369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -806,6 +806,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4110142037190717605, guid: aad89f4873117c74aadf53aa834f8d5b, type: 3}
+      propertyPath: isVR
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3514820299513337457, guid: aad89f4873117c74aadf53aa834f8d5b, type: 3}
       propertyPath: m_Name
       value: Prototype Runner
@@ -1285,7 +1289,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1418241207}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 871b1f192af926e48b9934e63c91e64a, type: 3}
   m_Name: 

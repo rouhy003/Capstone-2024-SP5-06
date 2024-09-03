@@ -43,7 +43,7 @@ public class GameController : NetworkBehaviour
         switch (Phase)
         {
             case GamePhase.Starting:
-                FindObjectOfType<PlayerSpawner>().StartPlayerSpawner(this);
+                //FindObjectOfType<PlayerSpawner>().StartPlayerSpawner(this);
                 Phase = GamePhase.Running;
                 break;
             case GamePhase.Running:
