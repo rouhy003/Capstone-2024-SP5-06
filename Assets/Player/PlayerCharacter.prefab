@@ -16,7 +16,8 @@ GameObject:
   - component: {fileID: 5487582202063905251}
   - component: {fileID: 1271565618602741216}
   - component: {fileID: 3100300927541759960}
-  - component: {fileID: 9066104238723919629}
+  - component: {fileID: 6292092559337151406}
+  - component: {fileID: 3504121299383741473}
   m_Layer: 0
   m_Name: PlayerCharacter
   m_TagString: Untagged
@@ -131,7 +132,8 @@ MonoBehaviour:
   NetworkedBehaviours:
   - {fileID: 1271565618602741216}
   - {fileID: 3100300927541759960}
-  - {fileID: 9066104238723919629}
+  - {fileID: 6292092559337151406}
+  - {fileID: 3504121299383741473}
 --- !u!143 &5487582202063905251
 CharacterController:
   m_ObjectHideFlags: 0
@@ -190,7 +192,7 @@ MonoBehaviour:
   JumpForce: 5
   GravityValue: -9.81
   Camera: {fileID: 0}
---- !u!114 &9066104238723919629
+--- !u!114 &6292092559337151406
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -199,9 +201,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 974161794308657442}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8de115902b54f054aa35adc10afb5933, type: 3}
+  m_Script: {fileID: 11500000, guid: 1150f50d67aadf94caacc6cba53f9115, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 6773461364462831550, guid: f2fc5097169564b4abc03a97c401a6ff, type: 3}
+  OnWeaponShoot:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3504121299383741473}
+        m_TargetAssemblyTypeName: LegacyWeapon, Assembly-CSharp
+        m_MethodName: Shoot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3504121299383741473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 974161794308657442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6750268c055dfe14f87b2e1cb12d01ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   shootSpeed: 15
   PlayerMovement: {fileID: 3100300927541759960}
