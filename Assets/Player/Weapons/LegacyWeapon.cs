@@ -1,23 +1,18 @@
 using Fusion;
 using UnityEngine;
 
-public class LegacyWeapon : NetworkBehaviour
+public class LegacyWeapon : GenericWeapon
 {
-    public float shootSpeed = 15f;
-
-    public PlayerMovement PlayerMovement;
     ProjectileManager pm;
 
-    void Start()
+    new private void Start()
     {
+        base.Start();
         pm = FindObjectOfType<ProjectileManager>();
     }
 
-    public void Shoot()
+    public override void Shoot()
     {
-        Ray ray = PlayerMovement.Camera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-        ray.origin += PlayerMovement.Camera.transform.forward;
-
-        pm.FireProjectileRPC(ray.origin, PlayerMovement.Camera.transform.forward * shootSpeed);
+        pm.FireProjectileRPC(GetFiringRayOrigin(), GetCameraTransformForward() * shootSpeed);
     }
 }
