@@ -219,6 +219,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  currentWeapons: []
 --- !u!114 &3504121299383741473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,5 +232,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6750268c055dfe14f87b2e1cb12d01ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootSpeed: 15
-  PlayerMovement: {fileID: 3100300927541759960}
