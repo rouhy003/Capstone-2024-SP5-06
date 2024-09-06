@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public abstract class GenericWeapon : NetworkBehaviour
 {
-    protected float shootSpeed = 10f;
+    [SerializeField] protected float shootSpeed = 10f;
 
     protected PlayerMovement PlayerMovement;
 

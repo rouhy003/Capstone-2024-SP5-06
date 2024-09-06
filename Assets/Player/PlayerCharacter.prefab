@@ -17,6 +17,9 @@ GameObject:
   - component: {fileID: 1271565618602741216}
   - component: {fileID: 3100300927541759960}
   - component: {fileID: 6292092559337151406}
+  - component: {fileID: -249028523564568516}
+  - component: {fileID: 6809504568322392744}
+  - component: {fileID: -6763396685298309195}
   m_Layer: 0
   m_Name: PlayerCharacter
   m_TagString: Untagged
@@ -132,6 +135,9 @@ MonoBehaviour:
   - {fileID: 1271565618602741216}
   - {fileID: 3100300927541759960}
   - {fileID: 6292092559337151406}
+  - {fileID: -249028523564568516}
+  - {fileID: 6809504568322392744}
+  - {fileID: -6763396685298309195}
 --- !u!143 &5487582202063905251
 CharacterController:
   m_ObjectHideFlags: 0
@@ -202,3 +208,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1150f50d67aadf94caacc6cba53f9115, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentWeapon: {fileID: 0}
+  WeaponList: []
+--- !u!114 &-249028523564568516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 974161794308657442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6750268c055dfe14f87b2e1cb12d01ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shootSpeed: 10
+--- !u!114 &6809504568322392744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 974161794308657442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6750268c055dfe14f87b2e1cb12d01ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shootSpeed: 20
+--- !u!114 &-6763396685298309195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 974161794308657442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6750268c055dfe14f87b2e1cb12d01ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shootSpeed: 5

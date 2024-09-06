@@ -26,6 +26,26 @@ public class Weapon : NetworkBehaviour
         currentWeapon = WeaponList[0];
     }
 
+    // Selects the next weapon
+    public void NextWeapon()
+    {
+        // If the player has more than one weapon
+        if (WeaponList.Count > 0)
+        {
+            int weaponIndex = WeaponList.IndexOf(currentWeapon);
+
+            // If the player is currently weilding the last weapon in the list
+            if (weaponIndex >= WeaponList.Count - 1)
+            {
+                currentWeapon = WeaponList[0];
+            }
+            else
+            {
+                currentWeapon = WeaponList[weaponIndex + 1];
+            }
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -37,6 +57,10 @@ public class Weapon : NetworkBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             currentWeapon.Shoot();
+        }
+        else if (Input.GetKeyDown(KeyCode.R))
+        {
+            NextWeapon();
         }
     }
 }
