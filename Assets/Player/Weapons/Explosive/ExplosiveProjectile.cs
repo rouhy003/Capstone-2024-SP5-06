@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ExplosiveProjectile : PhysxBall
 {
-    [SerializeField] private float explosionRadius = 10f;
-    [SerializeField] private float explosionPower = 30f;
+    [SerializeField] private float explosionRadius = 1.5f;
+    [SerializeField] private float explosionPower = 100f;
 
     void OnCollisionEnter(Collision collision)
     {
@@ -27,8 +28,7 @@ public class ExplosiveProjectile : PhysxBall
                 rb.AddExplosionForce(
                     explosionPower,
                     explosionPosition,
-                    explosionRadius,
-                    upwardsModifier: 3f
+                    explosionRadius
                 );
             }
         }
