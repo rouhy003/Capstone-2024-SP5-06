@@ -9,10 +9,10 @@ public class ObjectManager : NetworkBehaviour
 
     // Represents the object's size to calculate spawning space
     // Currently set to a default value, but it should be calculated based on the prefab's collision
-    private Vector3 objectSize = new Vector3(1, 1, 1);
+    private Vector3 objectSize = new Vector3(0.3f, 0.5f, 0.3f);
 
     private List<NetworkObject> currentObjects = new List<NetworkObject>();
-    public const int ObjectLimit = 5;
+    public const int ObjectLimit = 100;
 
     public override void FixedUpdateNetwork()
     {
