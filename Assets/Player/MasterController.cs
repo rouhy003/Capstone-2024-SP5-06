@@ -9,21 +9,42 @@ public class MasterController : MonoBehaviour
 
     void Update()
     {
-        if (OVRInput.Get(OVRInput.Button.Two))
+        if ( puw != null)
         {
-            if (puw.pickedUp == true && puw != null && weaponHeld == true)
+            if (OVRInput.Get(OVRInput.Button.Two))
             {
-                puw.pickedUp = false;
-                weaponHeld = false;
+                if (puw.pickedUp == true && weaponHeld == true)
+                {
+                    puw.pickedUp = false;
+                    weaponHeld = false;
+                }
+            }
+            else if (OVRInput.Get(OVRInput.Button.One))
+            {
+                if (puw.canBePickedUp == true && weaponHeld == false)
+                {
+                    puw.PickUp();
+                    weaponHeld = true;
+                }
             }
         }
-        else if (OVRInput.Get(OVRInput.Button.One))
+    }
+
+    private void OnTriggerEnter(Collider collider)
+    {
+        if (collider.GetComponent<PickUpWeapon>() != null && weaponHeld == false)
         {
-            if (puw.canBePickedUp == true && puw != null && weaponHeld == false)
-            {
-                puw.PickUp();
-                weaponHeld = true;
-            }
+            puw = collider.GetComponent<PickUpWeapon>();
+            puw.canBePickedUp = true;
+            puw.controller = this.gameObject.transform;
+        }
+    }
+
+    private void OnTriggerExit(Collider collider)
+    {
+        if (puw != null)
+        {
+            puw.canBePickedUp = false;
         }
     }
 }

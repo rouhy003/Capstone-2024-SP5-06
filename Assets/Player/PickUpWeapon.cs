@@ -5,7 +5,7 @@ using UnityEngine;
 public class PickUpWeapon : MonoBehaviour
 {
     GameObject startTransform;
-    Transform controller;
+    public Transform controller;
     public bool canBePickedUp = false;
     public bool pickedUp = false;
 
@@ -30,21 +30,6 @@ public class PickUpWeapon : MonoBehaviour
             transform.position = startTransform.transform.position;
             transform.rotation = startTransform.transform.rotation;
         }
-    }
-
-    private void OnTriggerEnter(Collider collider)
-    {
-        if (collider.GetComponent<MasterController>() != null && collider.GetComponent<MasterController>().weaponHeld == false)
-        {
-            canBePickedUp = true;
-            controller = collider.gameObject.transform;
-            collider.GetComponent<MasterController>().puw = this;
-        }
-    }
-
-    private void OnTriggerExit(Collider collider)
-    {
-        canBePickedUp = false;
     }
 
     public void PickUp()
