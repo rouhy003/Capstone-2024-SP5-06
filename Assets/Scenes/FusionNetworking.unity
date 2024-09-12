@@ -1315,6 +1315,15 @@ MonoBehaviour:
     Scaling: 0
     Alignment: 0
     IgnorePrefabSize: 0
+  - Labels: 1
+    Prefabs:
+    - {fileID: 4350422998566360405, guid: 8f898a95c4f034d4094f6f38fd0d5f78, type: 3}
+    PrefabSelection: 0
+    MatchAspectRatio: 0
+    CalculateFacingDirection: 0
+    Scaling: 0
+    Alignment: 0
+    IgnorePrefabSize: 0
 --- !u!114 &1965298779
 MonoBehaviour:
   m_ObjectHideFlags: 0
