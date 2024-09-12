@@ -5,7 +5,11 @@ using UnityEngine;
 public class MasterController : MonoBehaviour
 {
     public PickUpWeapon puw;
-    public bool weaponHeld = false;
+    public bool isWeaponHeld = false;
+    public GenericWeapon weaponHeld;
+    public float CoolDownTime = 2;
+    bool canShoot = true;
+    bool coroutineRunning = false;
 
     void Update()
     {
@@ -13,18 +17,30 @@ public class MasterController : MonoBehaviour
         {
             if (OVRInput.Get(OVRInput.Button.Two))
             {
-                if (puw.pickedUp == true && weaponHeld == true)
+                if (puw.pickedUp == true && isWeaponHeld == true)
                 {
                     puw.pickedUp = false;
-                    weaponHeld = false;
+                    isWeaponHeld = false;
+                    weaponHeld = null;
+                    puw = null;
                 }
             }
             else if (OVRInput.Get(OVRInput.Button.One))
             {
-                if (puw.canBePickedUp == true && weaponHeld == false)
+                if (puw.canBePickedUp == true && isWeaponHeld == false)
                 {
                     puw.PickUp();
-                    weaponHeld = true;
+                    isWeaponHeld = true;
+                    weaponHeld = puw.gameObject.GetComponent<GenericWeapon>();
+                }
+            }
+            else if (OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger) > 0 && canShoot)
+            {
+                if (weaponHeld != null)
+                {
+                    weaponHeld.Shoot();
+                    canShoot = false;
+                    StartCoroutine(WeaponCoolDown());
                 }
             }
         }
@@ -32,7 +48,7 @@ public class MasterController : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.GetComponent<PickUpWeapon>() != null && weaponHeld == false)
+        if (collider.GetComponent<PickUpWeapon>() != null && isWeaponHeld == false)
         {
             puw = collider.GetComponent<PickUpWeapon>();
             puw.canBePickedUp = true;
@@ -45,6 +61,17 @@ public class MasterController : MonoBehaviour
         if (puw != null)
         {
             puw.canBePickedUp = false;
+        }
+    }
+
+    public IEnumerator WeaponCoolDown()
+    {
+        if (!coroutineRunning)
+        {
+            coroutineRunning = true;
+            yield return new WaitForSeconds(CoolDownTime);
+            canShoot = true;
+            coroutineRunning = false;
         }
     }
 }
