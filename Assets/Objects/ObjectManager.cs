@@ -27,13 +27,13 @@ public class ObjectManager : NetworkBehaviour
     {
         // Sets the object spawn position at set elevation, then re-elevates the position based on whether there is ground underneath
         Vector3 spawnPosition = new Vector3(x, 5, z);
-        float groundElevation = GetGroundElevation(spawnPosition);
 
-        // If there is ground underneath where the object can spawn
-        if (groundElevation != float.NegativeInfinity)
+        RaycastHit groundCast;
+        bool hasGround = Physics.Linecast(spawnPosition, spawnPosition + (10 * Vector3.down), out groundCast);
+
+        if (hasGround)
         {
-            // Updates the spawn position to spawn on the ground
-            spawnPosition.Set(spawnPosition.x, groundElevation + (objectSize.y / 2), spawnPosition.z);
+            spawnPosition.Set(spawnPosition.x, groundCast.point.y + (objectSize.y / 2), spawnPosition.z);
 
             Debug.Log(objectSize);
 
@@ -44,22 +44,6 @@ public class ObjectManager : NetworkBehaviour
                 NetworkObject spawnedObject = Runner.Spawn(objectPrefab, spawnPosition);
                 currentObjects.Add(spawnedObject);
             }
-        }
-    }
-
-    // Returns the elevation of the ground underneath the spawn position, if detected.
-    public float GetGroundElevation(Vector3 spawnPosition)
-    {
-        RaycastHit hit;
-
-        // Shifts the spawn position's Y value to match the elevation of the ground, if found.
-        if (Physics.Linecast(spawnPosition, spawnPosition + ( 10 * Vector3.down), out hit)) {
-            return hit.point.y;
-        }
-        else
-        {
-            // Returns negative infinity if there is no ground underneath
-            return float.NegativeInfinity;
         }
     }
 
