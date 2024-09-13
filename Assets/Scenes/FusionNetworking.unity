@@ -948,7 +948,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1002061987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1150,6 +1150,7 @@ MonoBehaviour:
   puw: {fileID: 0}
   isWeaponHeld: 0
   weaponHeld: {fileID: 0}
+  CoolDownTime: 2
 --- !u!65 &1091262160
 BoxCollider:
   m_ObjectHideFlags: 0
