@@ -31,11 +31,9 @@ public class ObjectManager : NetworkBehaviour
         RaycastHit groundCast;
         bool hasGround = Physics.Linecast(spawnPosition, spawnPosition + (10 * Vector3.down), out groundCast);
 
-        if (hasGround)
+        if (hasGround && groundCast.collider.tag == "Ground")
         {
             spawnPosition.Set(spawnPosition.x, groundCast.point.y + (objectSize.y / 2), spawnPosition.z);
-
-            Debug.Log(objectSize);
 
             // Checks to make sure that there is enough space to spawn the object
             Collider[] overlap = Physics.OverlapBox(spawnPosition, new Vector3(objectSize.x, objectSize.y * 0.49f, objectSize.z));
