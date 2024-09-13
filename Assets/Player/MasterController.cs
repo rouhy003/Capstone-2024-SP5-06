@@ -11,49 +11,83 @@ public class MasterController : MonoBehaviour
     public float CoolDownTime = 2;
     bool canShoot = true;
     bool coroutineRunning = false;
+    public bool leftHand = false;
 
     void Update()
     {
         if ( puw != null)
         {
-            if (OVRInput.Get(OVRInput.Button.Two))
+            if (leftHand)
             {
-                if (puw.pickedUp == true && isWeaponHeld == true)
+                if (OVRInput.Get(OVRInput.Button.Four))
                 {
-                    puw.pickedUp = false;
-                    isWeaponHeld = false;
-                    weaponHeld = null;
-                    puw = null;
+                    PutDownWeapon();
+                }
+                else if (OVRInput.Get(OVRInput.Button.Three))
+                {
+                    PickUpWeapon();
+                }
+                else if (OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger) > 0 && canShoot && leftHand)
+                {
+                    FireWeapon();
                 }
             }
-            else if (OVRInput.Get(OVRInput.Button.One))
+            else
             {
-                if (puw.canBePickedUp == true && isWeaponHeld == false)
+                if (OVRInput.Get(OVRInput.Button.Two))
                 {
-                    puw.PickUp();
-                    isWeaponHeld = true;
-                    weaponHeld = puw.gameObject.GetComponent<GenericWeapon>();
+                    PutDownWeapon();
                 }
-            }
-            else if (OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger) > 0 && canShoot)
-            {
-                if (weaponHeld != null)
+                else if (OVRInput.Get(OVRInput.Button.One))
                 {
-                    weaponHeld.Shoot();
-                    canShoot = false;
-                    StartCoroutine(WeaponCoolDown());
+                    PickUpWeapon();
+                }
+                else if (OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger) > 0 && canShoot && !leftHand)
+                {
+                    FireWeapon();   
                 }
             }
         }
     }
 
+    private void PickUpWeapon()
+    {
+        if (puw.canBePickedUp == true && isWeaponHeld == false)
+        {
+            puw.controller = this.gameObject.transform;
+            puw.PickUp();
+            isWeaponHeld = true;
+            weaponHeld = puw.gameObject.GetComponent<GenericWeapon>();
+        }
+    }
+
+    private void PutDownWeapon()
+    {
+        if (puw.pickedUp == true && isWeaponHeld == true)
+        {
+            puw.pickedUp = false;
+            isWeaponHeld = false;
+            weaponHeld = null;
+            puw = null;
+        }
+    }
+
+    private void FireWeapon()
+    {
+        if (weaponHeld != null)
+        {
+            weaponHeld.Shoot();
+            canShoot = false;
+            StartCoroutine(WeaponCoolDown());
+        }
+    }
+
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.GetComponent<PickUpWeapon>() != null && isWeaponHeld == false)
+        if (collider.GetComponent<PickUpWeapon>() != null && isWeaponHeld == false && !collider.GetComponent<PickUpWeapon>().pickedUp)
         {
             puw = collider.GetComponent<PickUpWeapon>();
             puw.canBePickedUp = true;
-            puw.controller = this.gameObject.transform;
         }
     }
 
