@@ -1306,7 +1306,7 @@ MonoBehaviour:
   SpawnOnStart: 1
   SeedValue: 0
   PrefabsToSpawn:
-  - Labels: 8088
+  - Labels: 776
     Prefabs:
     - {fileID: 6050321568962068136, guid: 4f1b8165b9fee5f4b8f315562b156aec, type: 3}
     PrefabSelection: 0
@@ -1318,6 +1318,15 @@ MonoBehaviour:
   - Labels: 1
     Prefabs:
     - {fileID: 4350422998566360405, guid: 8f898a95c4f034d4094f6f38fd0d5f78, type: 3}
+    PrefabSelection: 0
+    MatchAspectRatio: 0
+    CalculateFacingDirection: 0
+    Scaling: 0
+    Alignment: 0
+    IgnorePrefabSize: 0
+  - Labels: 7312
+    Prefabs:
+    - {fileID: 6347212780844437292, guid: d9cec0740e0721046bb658562e90a6e7, type: 3}
     PrefabSelection: 0
     MatchAspectRatio: 0
     CalculateFacingDirection: 0
