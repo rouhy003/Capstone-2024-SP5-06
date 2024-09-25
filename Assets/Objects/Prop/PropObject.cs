@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class PropObject : NetworkBehaviour
 {
+    private bool hasBeenStruck = false;
+
     [Networked] TickTimer life { get; set; }
     [SerializeField] private const int objectLifetime = 3;
 
@@ -20,9 +22,14 @@ public class PropObject : NetworkBehaviour
         }
     }
 
+    // Executes whenever the object is struck by a projectile.
     public void Knockdown()
     {
-        life = TickTimer.CreateFromSeconds(Runner, 0.5f);
+        // Resets the object's life if not previously struck before.
+        if (!hasBeenStruck)
+        {
+            life = TickTimer.CreateFromSeconds(Runner, 0.5f);
+        }
     }
 
     // Despawns the object through the current scene's object manager.
