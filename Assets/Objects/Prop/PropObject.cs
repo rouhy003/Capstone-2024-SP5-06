@@ -20,8 +20,13 @@ public class PropObject : NetworkBehaviour
         }
     }
 
+    public void Knockdown()
+    {
+        life = TickTimer.CreateFromSeconds(Runner, 0.5f);
+    }
+
     // Despawns the object through the current scene's object manager.
-    public void Despawn()
+    private void Despawn()
     {
         FindObjectOfType<ObjectManager>().DespawnObject(Object);
     }
