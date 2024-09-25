@@ -14,7 +14,7 @@ public class PhysxBall : NetworkBehaviour
 
     public void Fire(Vector3 firePoint, Vector3 forward)
     {
-        _rigidbody.Teleport(firePoint, Quaternion.identity);
+        //_rigidbody.Teleport(firePoint, Quaternion.identity);
 
         _rigidbody.Rigidbody.isKinematic = false;
         _rigidbody.Rigidbody.AddForce(forward, ForceMode.Impulse);
