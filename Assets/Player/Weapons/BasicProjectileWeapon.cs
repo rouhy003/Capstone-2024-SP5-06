@@ -15,7 +15,10 @@ public class BasicProjectileWeapon : GenericWeapon
 
     public override void Shoot()
     {
-        NetworkObject proj = Runner.Spawn(projectile, FirePoint.position);
-        proj.GetComponent<PhysxBall>().Fire(FirePoint.position, GetFiringRayOrigin() * shootSpeed);
+        if (Runner != null)
+        {
+            NetworkObject proj = Runner.Spawn(projectile, FirePoint.position);
+            proj.GetComponent<PhysxBall>().Fire(FirePoint.position, GetFiringRayOrigin() * shootSpeed);
+        }
     }
 }
