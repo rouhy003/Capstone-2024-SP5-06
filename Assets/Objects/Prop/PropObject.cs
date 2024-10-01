@@ -6,6 +6,9 @@ public class PropObject : NetworkBehaviour
 {
     private bool hasBeenStruck = false;
 
+    [SerializeField]
+    private const bool spawnsGrounded = true;
+
     [Networked] TickTimer life { get; set; }
     [SerializeField] private const int objectLifetime = 3;
 
@@ -20,6 +23,11 @@ public class PropObject : NetworkBehaviour
         {
             Despawn();
         }
+    }
+
+    public bool spawnsOnGround()
+    {
+        return spawnsGrounded;
     }
 
     // Executes whenever the object is struck by a projectile.
