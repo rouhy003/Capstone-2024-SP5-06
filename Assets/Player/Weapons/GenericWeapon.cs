@@ -10,6 +10,9 @@ public abstract class GenericWeapon : NetworkBehaviour
     protected PlayerMovement PlayerMovement;
     public Transform FirePoint;
     public bool isVR = false;
+    private bool canShoot = true;
+    public float CoolDownTime = 2;
+    bool coroutineRunning = false;
 
     protected void Start()
     {
@@ -42,4 +45,20 @@ public abstract class GenericWeapon : NetworkBehaviour
 
     // Represents the firing action of the weapon
     public abstract void Shoot();
+
+    public bool GetCanShoot()
+    {
+        return canShoot;
+    }
+
+    public IEnumerator WeaponCoolDown()
+    {
+        if (!coroutineRunning)
+        {
+            coroutineRunning = true;
+            yield return new WaitForSeconds(CoolDownTime);
+            canShoot = true;
+            coroutineRunning = false;
+        }
+    }
 }
