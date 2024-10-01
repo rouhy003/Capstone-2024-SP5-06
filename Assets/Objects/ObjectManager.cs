@@ -18,7 +18,7 @@ public class ObjectManager : NetworkBehaviour
     {
         if (currentObjects.Count < ObjectLimit)
         {
-            SpawnObject(objectPrefab, Random.Range(10, -10), Random.Range(10, -10));
+            SpawnObject(objectPrefab, Random.Range(20, -20), Random.Range(20, -20));
         }
     }
 
@@ -60,6 +60,23 @@ public class ObjectManager : NetworkBehaviour
                 }
             }
         }
+
+        // Checking to make sure that the object is within the perimeters of the room.
+        Vector3[] directions = { Vector3.forward, Vector3.left, Vector3.right, Vector3.back };
+        foreach (Vector3 vector in directions)
+        {
+            RaycastHit wallCast;
+            LayerMask mask = LayerMask.GetMask("Wall");
+
+            // If a wall isn't detected in at least one of the rays, then the object will not spawn.s
+            if (!Physics.Raycast(spawnPosition, spawnPosition + vector , out wallCast, 20f, mask))
+            {
+                canSpawn = false;
+            }
+        }
+
+        Physics.Raycast(spawnPosition, Vector3.forward, 50f);
+
 
         if (canSpawn)
         {
