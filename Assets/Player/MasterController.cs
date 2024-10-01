@@ -9,7 +9,6 @@ public class MasterController : MonoBehaviour
     public bool isWeaponHeld = false;
     public GenericWeapon weaponHeld;
     public float CoolDownTime = 2;
-    bool canShoot = true;
     public bool leftHand = false;
 
     void Update()
@@ -43,7 +42,7 @@ public class MasterController : MonoBehaviour
                 }
                 else if (OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger) > 0 && !leftHand)
                 {
-                    FireWeapon();   
+                    FireWeapon();
                 }
             }
         }
@@ -76,7 +75,6 @@ public class MasterController : MonoBehaviour
         if (weaponHeld != null && weaponHeld.GetCanShoot())
         {
             weaponHeld.Shoot();
-            canShoot = false;
             StartCoroutine(weaponHeld.WeaponCoolDown());
         }
     }

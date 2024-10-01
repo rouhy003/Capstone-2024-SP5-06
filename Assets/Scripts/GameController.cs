@@ -43,7 +43,6 @@ public class GameController : NetworkBehaviour
         switch (Phase)
         {
             case GamePhase.Starting:
-                FindObjectOfType<PlayerSpawner>().StartPlayerSpawner(this);
                 Phase = GamePhase.Running;
                 break;
             case GamePhase.Running:
@@ -88,21 +87,5 @@ public class GameController : NetworkBehaviour
 
     public void CheckForEndOfGame()
     {
-        int i = 0;
-        foreach (NetworkBehaviourId nbid in _playerDataNetworkedIds)
-        {
-            if (Runner.TryFindBehaviour(_playerDataNetworkedIds[i],
-                        out Health healthComponent) == false)
-            {
-                _playerDataNetworkedIds.RemoveAt(i);
-                i--;
-                continue;
-            }
-            if (healthComponent.NetworkedHealth <= 0)
-            {
-                Phase = GamePhase.Ending;
-            }
-            i++;
-        }
     }
 }
