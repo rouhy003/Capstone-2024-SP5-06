@@ -5,7 +5,8 @@ using Unity.VisualScripting;
 
 public class ObjectManager : NetworkBehaviour
 {
-    public GameObject objectPrefab;
+    [SerializeField]
+    public GameObject[] objectPrefabs;
 
     // Represents the object's size to calculate spawning space
     // Currently set to a default value, but it should be calculated based on the prefab's collision
@@ -18,7 +19,7 @@ public class ObjectManager : NetworkBehaviour
     {
         if (currentObjects.Count < ObjectLimit)
         {
-            SpawnObject(objectPrefab, Random.Range(20, -20), Random.Range(20, -20));
+            SpawnObject(objectPrefabs[Random.Range(0, objectPrefabs.Length)], Random.Range(20, -20), Random.Range(20, -20));
         }
     }
 

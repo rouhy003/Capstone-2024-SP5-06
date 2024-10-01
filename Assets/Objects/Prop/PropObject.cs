@@ -7,7 +7,7 @@ public class PropObject : NetworkBehaviour
     private bool hasBeenStruck = false;
 
     [SerializeField]
-    private const bool spawnsGrounded = true;
+    private bool spawnsGrounded;
 
     [Networked] TickTimer life { get; set; }
     [SerializeField] private const int objectLifetime = 3;
