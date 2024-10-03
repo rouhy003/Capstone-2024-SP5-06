@@ -13,21 +13,32 @@ public class ObjectManager : NetworkBehaviour
     private Vector3 objectSize = new Vector3(0.3f, 0.5f, 0.3f);
 
     private List<NetworkObject> currentObjects = new List<NetworkObject>();
-    public const int ObjectLimit = 100;
+    public const int ObjectLimit = 10;
 
     public override void FixedUpdateNetwork()
     {
+        // Attempts to spawn an object if the limit has yet to be reached.
         if (currentObjects.Count < ObjectLimit)
         {
-            SpawnObject(objectPrefabs[Random.Range(0, objectPrefabs.Length)], Random.Range(20, -20), Random.Range(20, -20));
+            Vector3 spawnPosition = getRandomSpawnPosition();
+
+            bool objectSpawned = false;
+            int spawnAttemptsRemaining = 10;
+
+            // Repeats the spawn attempt until either the object spawns successfully or there are no more remaining attempts.
+            while (!objectSpawned && spawnAttemptsRemaining > 0)
+            {
+                spawnPosition = getRandomSpawnPosition();
+                objectSpawned = SpawnObject(objectPrefabs[Random.Range(0, objectPrefabs.Length)], spawnPosition);
+                spawnAttemptsRemaining--;
+            }
         }
     }
 
     // Attempts to spawn an object at "x" and "y".
-    public void SpawnObject(GameObject prefab, float x, float z)
+    public bool SpawnObject(GameObject prefab, Vector3 spawnPosition)
     {
-        // Sets the object spawn position at set elevation, then re-elevates the position based on whether there is ground underneath
-        Vector3 spawnPosition = new Vector3(x, 2f, z);
+        Debug.Log(spawnPosition);
 
         bool canSpawn = false;
 
@@ -83,7 +94,18 @@ public class ObjectManager : NetworkBehaviour
         {
             NetworkObject spawnedObject = Runner.Spawn(prefab, spawnPosition);
             currentObjects.Add(spawnedObject);
+            return true;
         }
+        return false;
+    }
+
+    // Returns a random spawn position.
+    private Vector3 getRandomSpawnPosition()
+    {
+        return new Vector3(
+                    Random.Range(20f, -20f),
+                    Random.Range(1f, 5f),
+                    Random.Range(20f, -20f));
     }
 
     // Despawns the specified object and removes it from the list of current objects.
