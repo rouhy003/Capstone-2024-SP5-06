@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Fusion;
+using TMPro;
 using UnityEngine;
 
 public class GameController : NetworkBehaviour
@@ -15,7 +15,12 @@ public class GameController : NetworkBehaviour
 
     private static GameController _singleton;
     [Networked] private GamePhase Phase { get; set; }
+    [Networked] TickTimer gameTimer { get; set; }
+    [Networked] int playerCount { get; set; }
     [SerializeField] private List<NetworkBehaviourId> _playerDataNetworkedIds = new List<NetworkBehaviourId>();
+
+    public TextMeshProUGUI timeUI;
+    public int gameTime = 100;
 
     public static GameController Singleton
     {
@@ -32,6 +37,7 @@ public class GameController : NetworkBehaviour
 
     public override void Spawned()
     {
+        playerCount++;
         if (Object.HasStateAuthority)
         {
             Phase = GamePhase.Starting;
@@ -43,10 +49,10 @@ public class GameController : NetworkBehaviour
         switch (Phase)
         {
             case GamePhase.Starting:
-                Phase = GamePhase.Running;
+                GameStarting();
                 break;
             case GamePhase.Running:
-                CheckForEndOfGame();
+                GameRunning();
                 break;
             case GamePhase.Ending:
                 Runner.Shutdown();
@@ -80,12 +86,24 @@ public class GameController : NetworkBehaviour
         _playerDataNetworkedIds.Add(playerDataNetworkedId);
     }
 
-    public void EndGame()
-    {
-        Phase = GamePhase.Ending;
-    }
 
-    public void CheckForEndOfGame()
+    public void GameStarting()
     {
+        if (playerCount == 1)
+        {
+            gameTimer = TickTimer.CreateFromSeconds(Runner, gameTime);
+            Phase = GamePhase.Running;
+        }
+    }
+        
+    public void GameRunning()
+    {
+        int time = (int)gameTimer.RemainingTime(Runner);
+        timeUI.SetText(time.ToString());
+
+        if (gameTimer.Expired(Runner))
+        {
+            Phase = GamePhase.Ending;
+        }
     }
 }

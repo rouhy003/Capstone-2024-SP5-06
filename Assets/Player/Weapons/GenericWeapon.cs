@@ -56,6 +56,7 @@ public abstract class GenericWeapon : NetworkBehaviour
         if (!coroutineRunning)
         {
             coroutineRunning = true;
+            canShoot = false;
             yield return new WaitForSeconds(CoolDownTime);
             canShoot = true;
             coroutineRunning = false;
