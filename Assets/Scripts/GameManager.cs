@@ -134,6 +134,7 @@ public class GameManager : NetworkBehaviour
         if (gameTimer.Expired(Runner))
         {
             Phase = GamePhase.Ending;
+            gameTimer = TickTimer.CreateFromSeconds(Runner, postGameTime);
         }
     }
 
@@ -153,8 +154,6 @@ public class GameManager : NetworkBehaviour
         {
             joinText.SetText("Its a draw!");
         }
-
-        gameTimer = TickTimer.CreateFromSeconds(Runner, postGameTime);
 
 
         if (gameTimer.Expired(Runner))
