@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using Fusion;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class GameController : NetworkBehaviour
+public class GameManager : NetworkBehaviour
 {
     enum GamePhase
     {
@@ -13,7 +14,7 @@ public class GameController : NetworkBehaviour
         Ending
     }
 
-    private static GameController _singleton;
+    private static GameManager _singleton;
     [Networked] private GamePhase Phase { get; set; }
     [Networked] TickTimer gameTimer { get; set; }
     [Networked] int playerCount { get; set; }
@@ -21,11 +22,17 @@ public class GameController : NetworkBehaviour
 
     public GameObject gameUI;
     public GameObject joinMenu;
-
     public TextMeshProUGUI timeUI;
-    public int gameTime = 100;
+    public TextMeshProUGUI joinText;
 
-    public static GameController Singleton
+    public int gameTime = 100;
+    public int preGameTime = 10;
+    public int postGameTime = 15;
+
+    ScoreManager sm;
+
+    //Constrocts the GameManager as a singleton.
+    public static GameManager Singleton
     {
         get => _singleton;
         private set
@@ -38,15 +45,18 @@ public class GameController : NetworkBehaviour
         }
     }
 
+    //Called after object is spawned. Increases player count 
     public override void Spawned()
     {
         playerCount++;
+        sm = FindObjectOfType<ScoreManager>();
         if (Object.HasStateAuthority)
         {
             Phase = GamePhase.Starting;
         }
     }
 
+    //Checks game phase on render
     public override void Render()
     {
         switch (Phase)
@@ -58,7 +68,7 @@ public class GameController : NetworkBehaviour
                 GameRunning();
                 break;
             case GamePhase.Ending:
-                Runner.Shutdown();
+                GameEnding();
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
@@ -94,10 +104,25 @@ public class GameController : NetworkBehaviour
     {
         if (playerCount == 1)
         {
-            gameTimer = TickTimer.CreateFromSeconds(Runner, gameTime);
-            joinMenu.SetActive(false);
-            gameUI.SetActive(true);
-            Phase = GamePhase.Running;
+            if (!gameTimer.IsRunning)
+            {
+                gameTimer = TickTimer.CreateFromSeconds(Runner, preGameTime);
+            }
+            
+            int time = (int)gameTimer.RemainingTime(Runner);
+            joinText.SetText("Game starting in: " + time.ToString());
+
+            if (gameTimer.Expired(Runner))
+            {
+                gameTimer = TickTimer.CreateFromSeconds(Runner, gameTime);
+                joinMenu.SetActive(false);
+                gameUI.SetActive(true);
+                Phase = GamePhase.Running;
+            }
+        }
+        else
+        {
+            joinText.SetText("Waiting for other player to join");
         }
     }
         
@@ -109,6 +134,33 @@ public class GameController : NetworkBehaviour
         if (gameTimer.Expired(Runner))
         {
             Phase = GamePhase.Ending;
+        }
+    }
+
+    public void GameEnding()
+    {
+        joinMenu.SetActive(true);
+        gameUI.SetActive(false);
+        if (sm.GetP1Score() > sm.GetP2Score())
+        {
+            joinText.SetText("Player 1 wins!");
+        }
+        else if (sm.GetP1Score() < sm.GetP2Score())
+        {
+            joinText.SetText("Player 2 wins!");
+        }
+        else
+        {
+            joinText.SetText("Its a draw!");
+        }
+
+        gameTimer = TickTimer.CreateFromSeconds(Runner, postGameTime);
+
+
+        if (gameTimer.Expired(Runner))
+        {
+            Runner.Shutdown();
+            SceneManager.LoadScene(0);
         }
     }
 }

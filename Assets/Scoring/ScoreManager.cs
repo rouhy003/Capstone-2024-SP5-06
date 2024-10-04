@@ -15,6 +15,7 @@ public class ScoreManager : NetworkBehaviour
     public TextMeshProUGUI p1score;
     public TextMeshProUGUI p2score;
 
+    //Sets the initial score of both players
     public void InitialiseGame()
     {
         if (HasStateAuthority)
@@ -24,18 +25,20 @@ public class ScoreManager : NetworkBehaviour
         }
     }
 
+    //Updates the UI text for player 1s score.
     public void ChangeP1Score()
     {
-        Debug.Log(player1Score);
         p1score.SetText("Player 1 Score: " + player1Score.ToString());
     }
 
+    //Updates the UI text for player 2s score.
     public void ChangeP2Score()
     {
-        Debug.Log(player2Score);
         p1score.SetText("Player 2 Score: " + player2Score.ToString());
     }
 
+    //RPC for increasing player 1s score. If increase is set to true the score goes up by the set amount
+    //if its false the score goes down.
     [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
     public void ChangeP1ScoreRPC(bool increase, int amount)
     {
@@ -50,6 +53,8 @@ public class ScoreManager : NetworkBehaviour
         ChangeP1Score();
     }
 
+    //RPC for increasing player 2s score. If increase is set to true the score goes up by the set amount
+    //if its false the score goes down.
     [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
     public void ChangeP2ScoreRPC(bool increase, int amount)
     {
@@ -62,5 +67,17 @@ public class ScoreManager : NetworkBehaviour
             player2Score -= amount;
         }
         ChangeP2Score();
+    }
+
+    //Returns player 1 score.
+    public int GetP1Score()
+    {
+        return player1Score;
+    }
+
+    //Returns player 2 score.
+    public int GetP2Score()
+    {
+        return player2Score;
     }
 }

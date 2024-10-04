@@ -21,6 +21,7 @@ public class MasterController : MonoBehaviour
 
     void Update()
     {
+        //Handles input for joining a game.
         if (!isJoined)
         {
             if (OVRInput.Get(OVRInput.Button.Three) || OVRInput.Get(OVRInput.Button.One))
@@ -30,8 +31,10 @@ public class MasterController : MonoBehaviour
             }
         }
 
+        //Handles controller input if a weapon is overlapped.
         if ( puw != null)
         {
+            //Left controller
             if (leftHand)
             {
                 if (OVRInput.Get(OVRInput.Button.Four))
@@ -47,6 +50,7 @@ public class MasterController : MonoBehaviour
                     FireWeapon();
                 }
             }
+            //Right controller
             else
             {
                 if (OVRInput.Get(OVRInput.Button.Two))
@@ -96,6 +100,7 @@ public class MasterController : MonoBehaviour
         }
     }
 
+    //Sets the PickUpWeapon script if collider overlaps an object with one.
     private void OnTriggerEnter(Collider collider)
     {
         if (collider.GetComponent<PickUpWeapon>() != null && isWeaponHeld == false && !collider.GetComponent<PickUpWeapon>().pickedUp)
@@ -105,6 +110,7 @@ public class MasterController : MonoBehaviour
         }
     }
 
+    //Sets the PickUpWeapon script to null if collider leaves an object.
     private void OnTriggerExit(Collider collider)
     {
         if (puw != null)
