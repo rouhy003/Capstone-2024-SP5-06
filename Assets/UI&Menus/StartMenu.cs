@@ -5,19 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class StartMenu : MonoBehaviour
 {
-    [SerializeField] private TMP_InputField _LobbyID;
+    [SerializeField] public string _LobbyID;
     [SerializeField] private NetworkRunner _networkRunnerPrefab = null;
+
+    public TextMeshProUGUI joinText;
 
     private NetworkRunner _runnerInstance = null;
 
-    public void StartSharedPC()
-    {
-        StartGame(GameMode.Shared, _LobbyID.text, false);
-    }
-
     public void StartSharedVR()
     {
-        StartGame(GameMode.Shared, _LobbyID.text, true);
+        joinText.SetText("Joining...");
+        StartGame(GameMode.Shared, _LobbyID, true);
     }
 
     private async void StartGame(GameMode mode, string roomName, bool isVR)
@@ -28,7 +26,6 @@ public class StartMenu : MonoBehaviour
             _runnerInstance = Instantiate(_networkRunnerPrefab);
         }
 
-        _runnerInstance.GetComponent<LoadPCorVR>().isVR = isVR;
 
         // Let the Fusion Runner know that we will be providing user input
         _runnerInstance.ProvideInput = true;
@@ -37,15 +34,10 @@ public class StartMenu : MonoBehaviour
         {
             GameMode = mode,
             SessionName = roomName,
-            Scene = SceneRef.FromIndex(1)
+            Scene = SceneRef.FromIndex(0)
         };
 
         await _runnerInstance.StartGame(startGameArgs);
-
-        if (_runnerInstance.IsServer)
-        {
-            _runnerInstance.LoadScene("1");
-        }
     }
 
 }

@@ -9,14 +9,32 @@ public class MasterController : MonoBehaviour
     public bool isWeaponHeld = false;
     public GenericWeapon weaponHeld;
     public float CoolDownTime = 2;
-    bool canShoot = true;
-    bool coroutineRunning = false;
     public bool leftHand = false;
+
+    StartMenu sm;
+    bool isJoined = false;
+
+    private void Start()
+    {
+        sm = FindObjectOfType<StartMenu>();
+    }
 
     void Update()
     {
+        //Handles input for joining a game.
+        if (!isJoined)
+        {
+            if (OVRInput.Get(OVRInput.Button.Three) || OVRInput.Get(OVRInput.Button.One))
+            {
+                isJoined = true;
+                sm.StartSharedVR();
+            }
+        }
+
+        //Handles controller input if a weapon is overlapped.
         if ( puw != null)
         {
+            //Left controller
             if (leftHand)
             {
                 if (OVRInput.Get(OVRInput.Button.Four))
@@ -27,11 +45,12 @@ public class MasterController : MonoBehaviour
                 {
                     PickUpWeapon();
                 }
-                else if (OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger) > 0 && canShoot && leftHand)
+                else if (OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger) > 0 && leftHand)
                 {
                     FireWeapon();
                 }
             }
+            //Right controller
             else
             {
                 if (OVRInput.Get(OVRInput.Button.Two))
@@ -42,9 +61,9 @@ public class MasterController : MonoBehaviour
                 {
                     PickUpWeapon();
                 }
-                else if (OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger) > 0 && canShoot && !leftHand)
+                else if (OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger) > 0 && !leftHand)
                 {
-                    FireWeapon();   
+                    FireWeapon();
                 }
             }
         }
@@ -54,7 +73,7 @@ public class MasterController : MonoBehaviour
     {
         if (puw.canBePickedUp == true && isWeaponHeld == false)
         {
-            puw.controller = this.gameObject.transform;
+            puw.controller = gameObject.transform;
             puw.PickUp();
             isWeaponHeld = true;
             weaponHeld = puw.gameObject.GetComponent<GenericWeapon>();
@@ -65,7 +84,7 @@ public class MasterController : MonoBehaviour
     {
         if (puw.pickedUp == true && isWeaponHeld == true)
         {
-            puw.pickedUp = false;
+            puw.PutDown();
             isWeaponHeld = false;
             weaponHeld = null;
             puw = null;
@@ -74,14 +93,14 @@ public class MasterController : MonoBehaviour
 
     private void FireWeapon()
     {
-        if (weaponHeld != null)
+        if (weaponHeld != null && weaponHeld.GetCanShoot())
         {
             weaponHeld.Shoot();
-            canShoot = false;
-            StartCoroutine(WeaponCoolDown());
+            StartCoroutine(weaponHeld.WeaponCoolDown());
         }
     }
 
+    //Sets the PickUpWeapon script if collider overlaps an object with one.
     private void OnTriggerEnter(Collider collider)
     {
         if (collider.GetComponent<PickUpWeapon>() != null && isWeaponHeld == false && !collider.GetComponent<PickUpWeapon>().pickedUp)
@@ -91,6 +110,7 @@ public class MasterController : MonoBehaviour
         }
     }
 
+    //Sets the PickUpWeapon script to null if collider leaves an object.
     private void OnTriggerExit(Collider collider)
     {
         if (puw != null)
@@ -99,14 +119,4 @@ public class MasterController : MonoBehaviour
         }
     }
 
-    public IEnumerator WeaponCoolDown()
-    {
-        if (!coroutineRunning)
-        {
-            coroutineRunning = true;
-            yield return new WaitForSeconds(CoolDownTime);
-            canShoot = true;
-            coroutineRunning = false;
-        }
-    }
 }

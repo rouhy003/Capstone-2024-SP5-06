@@ -1,6 +1,12 @@
 fileFormatVersion: 2
-guid: 4db7e82f474959440a13a5175ab99eb3
+<<<<<<<< HEAD:Assets/Oculus/VR.meta
+guid: 0aca1f0efe44e154a843b65d6da1a040
+folderAsset: yes
+DefaultImporter:
+========
+guid: 1fd573a948809f34cb7acd9b63d34424
 NativeFormatImporter:
+>>>>>>>> Passthrough-Networking:Assets/Resources/InputActions.asset.meta
   externalObjects: {}
   mainObjectFileID: 11400000
   userData: 

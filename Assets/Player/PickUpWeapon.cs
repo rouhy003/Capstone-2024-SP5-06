@@ -35,5 +35,12 @@ public class PickUpWeapon : MonoBehaviour
     public void PickUp()
     {
         pickedUp = true;
+        gameObject.GetComponent<BoxCollider>().isTrigger = true;
+    }
+
+    public void PutDown()
+    {
+        pickedUp = false;
+        gameObject.GetComponent<BoxCollider>().isTrigger = false;
     }
 }
