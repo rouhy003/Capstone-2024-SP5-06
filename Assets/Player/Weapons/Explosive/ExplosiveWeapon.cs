@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Fusion;
 
 public class ExplosiveWeapon : GenericWeapon
 {
@@ -14,6 +15,7 @@ public class ExplosiveWeapon : GenericWeapon
 
     public override void Shoot()
     {
-        Runner.Spawn(projectile, GetFiringRayOrigin());
+        NetworkObject proj = Runner.Spawn(projectile, GetFiringRayOrigin());
+        proj.GetComponent<PhysxBall>().player = playerHolding;
     }
 }

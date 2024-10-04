@@ -12,6 +12,7 @@ public abstract class GenericWeapon : NetworkBehaviour
     public bool isVR = false;
     private bool canShoot = true;
     public float CoolDownTime = 2;
+    public int playerHolding;
     bool coroutineRunning = false;
 
     protected void Start()

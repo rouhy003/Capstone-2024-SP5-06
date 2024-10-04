@@ -18,7 +18,9 @@ public class BasicProjectileWeapon : GenericWeapon
         if (Runner != null)
         {
             NetworkObject proj = Runner.Spawn(projectile, FirePoint.position);
-            proj.GetComponent<PhysxBall>().Fire(FirePoint.position, GetFiringRayOrigin() * shootSpeed);
+            PhysxBall p = proj.GetComponent<PhysxBall>();
+            p.player = playerHolding;
+            p.Fire(FirePoint.position, GetFiringRayOrigin() * shootSpeed);
         }
     }
 }

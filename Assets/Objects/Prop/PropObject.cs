@@ -11,6 +11,10 @@ public class PropObject : NetworkBehaviour
 
     [Networked] TickTimer life { get; set; }
     [SerializeField] private const int objectLifetime = 3;
+    [SerializeField] private int pointValue = 1;
+    [SerializeField] private bool addPoints = true;
+
+    public ScoreManager sm;
 
     public override void Spawned()
     {
@@ -31,11 +35,19 @@ public class PropObject : NetworkBehaviour
     }
 
     // Executes whenever the object is struck by a projectile.
-    public void Knockdown()
+    public void Knockdown(int player)
     {
         // Resets the object's life if not previously struck before.
         if (!hasBeenStruck)
         {
+            if (player == 1)
+            {
+                sm.ChangeP1ScoreRPC(addPoints, pointValue);
+            }
+            else if (player == 2)
+            {
+                sm.ChangeP2ScoreRPC(addPoints, pointValue);
+            }
             life = TickTimer.CreateFromSeconds(Runner, 0.5f);
         }
     }

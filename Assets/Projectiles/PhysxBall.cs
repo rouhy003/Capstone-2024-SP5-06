@@ -10,6 +10,8 @@ public class PhysxBall : NetworkBehaviour
     [Networked] TickTimer life { get; set; }
     [SerializeField] private const int lifetime = 3;
 
+    public int player;
+
     protected void Awake()
     {
         _rigidbody = GetComponent<NetworkRigidbody3D>();
@@ -43,7 +45,7 @@ public class PhysxBall : NetworkBehaviour
         PropObject prop = collision.gameObject.GetComponent<PropObject>();
         if (prop != null)
         {
-            prop.Knockdown();
+            prop.Knockdown(player);
         }
     }
 }
