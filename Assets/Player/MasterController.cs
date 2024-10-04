@@ -11,8 +11,25 @@ public class MasterController : MonoBehaviour
     public float CoolDownTime = 2;
     public bool leftHand = false;
 
+    StartMenu sm;
+    bool isJoined = false;
+
+    private void Start()
+    {
+        sm = FindObjectOfType<StartMenu>();
+    }
+
     void Update()
     {
+        if (!isJoined)
+        {
+            if (OVRInput.Get(OVRInput.Button.Three) || OVRInput.Get(OVRInput.Button.One))
+            {
+                isJoined = true;
+                sm.StartSharedVR();
+            }
+        }
+
         if ( puw != null)
         {
             if (leftHand)

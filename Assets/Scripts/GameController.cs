@@ -19,6 +19,9 @@ public class GameController : NetworkBehaviour
     [Networked] int playerCount { get; set; }
     [SerializeField] private List<NetworkBehaviourId> _playerDataNetworkedIds = new List<NetworkBehaviourId>();
 
+    public GameObject gameUI;
+    public GameObject joinMenu;
+
     public TextMeshProUGUI timeUI;
     public int gameTime = 100;
 
@@ -92,6 +95,8 @@ public class GameController : NetworkBehaviour
         if (playerCount == 1)
         {
             gameTimer = TickTimer.CreateFromSeconds(Runner, gameTime);
+            joinMenu.SetActive(false);
+            gameUI.SetActive(true);
             Phase = GamePhase.Running;
         }
     }
