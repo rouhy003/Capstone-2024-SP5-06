@@ -13,6 +13,9 @@ public class BasicProjectileWeapon : GenericWeapon
         base.Start();
     }
 
+    //Overrides GenericWeapon Shoot method.
+    //Spawns a projectile at the firePoint position and calls the fire method of the PhysxBall component to add velocity.
+    //Also sets the player float in the PhysxBall script to the playerHolding float (to find out which player fired the projectile).
     public override void Shoot()
     {
         if (Runner != null)

@@ -6,13 +6,16 @@ using Fusion;
 public class MasterController : MonoBehaviour
 {
     public PickUpWeapon puw;
-    public bool isWeaponHeld = false;
     public GenericWeapon weaponHeld;
-    public float CoolDownTime = 2;
-    public bool leftHand = false;
 
-    StartMenu sm;
+    public bool isWeaponHeld = false;
+    public bool leftHand = false;
+    
+    public float CoolDownTime = 2;
+    
     bool isJoined = false;
+    
+    StartMenu sm;    
 
     private void Start()
     {
@@ -69,6 +72,7 @@ public class MasterController : MonoBehaviour
         }
     }
 
+    //Sets the necessary values in the PickUpWeapon script, so that the weapon follows the controller.
     private void PickUpWeapon()
     {
         if (puw.canBePickedUp == true && isWeaponHeld == false)
@@ -80,6 +84,7 @@ public class MasterController : MonoBehaviour
         }
     }
 
+    //Resets the values in the PickUpWeapon script, so it stops following controller.
     private void PutDownWeapon()
     {
         if (puw.pickedUp == true && isWeaponHeld == true)
@@ -91,6 +96,7 @@ public class MasterController : MonoBehaviour
         }
     }
 
+    //Calls the Shoot method in the weapon script and starts the colldown coroutine.
     private void FireWeapon()
     {
         if (weaponHeld != null && weaponHeld.GetCanShoot())

@@ -9,7 +9,6 @@ public class PickUpWeapon : MonoBehaviour
     public bool canBePickedUp = false;
     public bool pickedUp = false;
 
-    // Start is called before the first frame update
     void Start()
     {
         startTransform = new GameObject();
@@ -17,7 +16,7 @@ public class PickUpWeapon : MonoBehaviour
         startTransform.transform.rotation = transform.rotation;
     }
 
-    // Update is called once per frame
+    //Sets the position and rotation of the weapon to either its starting transform or the transform of the controller that picked it up.
     void Update()
     {
         if (pickedUp == true)
@@ -32,12 +31,14 @@ public class PickUpWeapon : MonoBehaviour
         }
     }
 
+    //Sets pickedUp to true and makes the boxCollider a trigger, to avoid collisions while the weapon is held.
     public void PickUp()
     {
         pickedUp = true;
         gameObject.GetComponent<BoxCollider>().isTrigger = true;
     }
 
+    //Sets pickedUp to false and resets the boxCollider.
     public void PutDown()
     {
         pickedUp = false;
