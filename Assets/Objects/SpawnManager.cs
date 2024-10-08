@@ -8,13 +8,16 @@ public class SpawnManager : NetworkBehaviour
     [SerializeField]
     public GameObject[] spawnPrefabs;
 
+    // Represent's the object's size to calculate spawning space
     [SerializeField]
-    private Vector3 spawnBoundaries = new Vector3(0.3f, 0.5f, 0.3f);
+    protected Vector3 spawnBoundaries = new Vector3(0.3f, 0.5f, 0.3f);
 
-    private GameManager gm;
+    protected GameManager gm;
 
-    private List<NetworkObject> currentObjects = new List<NetworkObject>();
-    public const int ObjectLimit = 10;
+    protected List<NetworkObject> currentObjects = new List<NetworkObject>();
+
+    [SerializeField]
+    protected const int ObjectLimit = 10;
 
 
     // Start is called before the first frame update
@@ -31,7 +34,7 @@ public class SpawnManager : NetworkBehaviour
     }
 
     // Returns a random spawn position.
-    private Vector3 getRandomSpawnPosition()
+    protected Vector3 getRandomSpawnPosition()
     {
         return new Vector3(
                     Random.Range(20f, -20f),
