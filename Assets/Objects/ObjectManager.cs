@@ -35,8 +35,6 @@ public class ObjectManager : SpawnManager
     // Attempts to spawn an object at "x" and "y".
     public new bool SpawnObject(GameObject prefab, Vector3 spawnPosition)
     {
-        Debug.Log(spawnPosition);
-
         bool canSpawn = false;
 
         SpawnableObject prop = prefab.GetComponent<SpawnableObject>();
@@ -83,9 +81,6 @@ public class ObjectManager : SpawnManager
                 canSpawn = false;
             }
         }
-
-        Physics.Raycast(spawnPosition, Vector3.forward, 50f);
-
 
         if (canSpawn)
         {
