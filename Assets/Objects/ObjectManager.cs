@@ -39,7 +39,7 @@ public class ObjectManager : SpawnManager
 
         bool canSpawn = false;
 
-        PropObject prop = prefab.GetComponent<PropObject>();
+        SpawnableObject prop = prefab.GetComponent<SpawnableObject>();
         if (prop != null)
         {
             // Grounded object spawning
