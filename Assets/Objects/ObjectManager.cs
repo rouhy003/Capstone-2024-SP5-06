@@ -5,9 +5,6 @@ using Unity.VisualScripting;
 
 public class ObjectManager : SpawnManager
 {
-    [SerializeField]
-    public GameObject[] objectPrefabs;
-
     private ScoreManager sm;
 
     void Start()
@@ -29,7 +26,7 @@ public class ObjectManager : SpawnManager
             while (!objectSpawned && spawnAttemptsRemaining > 0)
             {
                 spawnPosition = getRandomSpawnPosition();
-                objectSpawned = SpawnObject(objectPrefabs[Random.Range(0, objectPrefabs.Length)], spawnPosition);
+                objectSpawned = SpawnObject(spawnPrefabs[Random.Range(0, spawnPrefabs.Length)], spawnPosition);
                 spawnAttemptsRemaining--;
             }
         }
