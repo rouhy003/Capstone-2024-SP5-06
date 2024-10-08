@@ -35,7 +35,7 @@ public class ExplosiveProjectile : PhysxBall
             PropObject prop = collider.gameObject.GetComponent<PropObject>();
             if (prop != null)
             {
-                prop.Knockdown();
+                prop.Knockdown(player);
             }
         }
         Runner.Despawn(Object);

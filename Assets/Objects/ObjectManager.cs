@@ -12,8 +12,15 @@ public class ObjectManager : NetworkBehaviour
     // Currently set to a default value, but it should be calculated based on the prefab's collision
     private Vector3 objectSize = new Vector3(0.3f, 0.5f, 0.3f);
 
+    private ScoreManager sm;
+
     private List<NetworkObject> currentObjects = new List<NetworkObject>();
     public const int ObjectLimit = 10;
+
+    private void Start()
+    {
+        sm = FindObjectOfType<ScoreManager>();
+    }
 
     public override void FixedUpdateNetwork()
     {
@@ -93,6 +100,7 @@ public class ObjectManager : NetworkBehaviour
         if (canSpawn)
         {
             NetworkObject spawnedObject = Runner.Spawn(prefab, spawnPosition);
+            spawnedObject.GetComponent<PropObject>().sm = sm;
             currentObjects.Add(spawnedObject);
             return true;
         }

@@ -34,7 +34,7 @@ public class ScoreManager : NetworkBehaviour
     //Updates the UI text for player 2s score.
     public void ChangeP2Score()
     {
-        p1score.SetText("Player 2 Score: " + player2Score.ToString());
+        p2score.SetText("Player 2 Score: " + player2Score.ToString());
     }
 
     //RPC for increasing player 1s score. If increase is set to true the score goes up by the set amount

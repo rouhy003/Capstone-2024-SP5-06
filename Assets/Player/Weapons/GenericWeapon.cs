@@ -3,17 +3,21 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
+//Base class for all possible weapons. Contains a Shoot method that needs to be implemented for each weapon
+//and WeaponCoolDown coroutine for the cooldown.
 public abstract class GenericWeapon : NetworkBehaviour
 {
     [SerializeField] protected float shootSpeed = 10f;
-
     protected PlayerMovement PlayerMovement;
+    
     public Transform FirePoint;
-    public bool isVR = false;
-    private bool canShoot = true;
     public float CoolDownTime = 2;
-    bool coroutineRunning = false;
-
+    public bool isVR = false;
+    public int playerHolding;
+    
+    private bool coroutineRunning = false;
+    private bool canShoot = true;
+   
     protected void Start()
     {
         if (!isVR)

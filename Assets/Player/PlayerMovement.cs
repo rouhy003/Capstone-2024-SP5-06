@@ -9,7 +9,6 @@ public class PlayerMovement : NetworkBehaviour
     private CharacterController _controller;
 
     public float PlayerSpeed = 2f;
-
     public float JumpForce = 5f;
     public float GravityValue = -9.81f;
 

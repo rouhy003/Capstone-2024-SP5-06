@@ -99,7 +99,7 @@ public class GameManager : NetworkBehaviour
         _playerDataNetworkedIds.Add(playerDataNetworkedId);
     }
 
-
+    //Checks for player count and starts a pre-game countdown if the minimum player amount is reached.
     public void GameStarting()
     {
         if (playerCount == 1)
@@ -125,7 +125,8 @@ public class GameManager : NetworkBehaviour
             joinText.SetText("Waiting for other player to join");
         }
     }
-        
+    
+    //Displays a countdown timer once the actual game has started.
     public void GameRunning()
     {
         int time = (int)gameTimer.RemainingTime(Runner);
@@ -134,9 +135,11 @@ public class GameManager : NetworkBehaviour
         if (gameTimer.Expired(Runner))
         {
             Phase = GamePhase.Ending;
+            gameTimer = TickTimer.CreateFromSeconds(Runner, postGameTime);
         }
     }
 
+    //Shows which player won the game and shuts down the networkRunner at the end of a timer.
     public void GameEnding()
     {
         joinMenu.SetActive(true);
@@ -153,9 +156,6 @@ public class GameManager : NetworkBehaviour
         {
             joinText.SetText("Its a draw!");
         }
-
-        gameTimer = TickTimer.CreateFromSeconds(Runner, postGameTime);
-
 
         if (gameTimer.Expired(Runner))
         {

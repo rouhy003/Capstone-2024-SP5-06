@@ -11,6 +11,8 @@ public class PhysxBall : NetworkBehaviour
 
     [SerializeField] private bool despawnOnCollision = false;
 
+    public int player;
+
     protected void Awake()
     {
         _rigidbody = GetComponent<NetworkRigidbody3D>();
@@ -44,7 +46,7 @@ public class PhysxBall : NetworkBehaviour
         PropObject prop = collision.gameObject.GetComponent<PropObject>();
         if (prop != null)
         {
-            prop.Knockdown();
+            prop.Knockdown(player);
         }
         
         if (despawnOnCollision)
