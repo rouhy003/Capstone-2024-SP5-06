@@ -3,21 +3,14 @@ using UnityEngine;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 
-public class ObjectManager : NetworkBehaviour
+public class ObjectManager : SpawnManager
 {
     [SerializeField]
     public GameObject[] objectPrefabs;
 
-    // Represents the object's size to calculate spawning space
-    // Currently set to a default value, but it should be calculated based on the prefab's collision
-    private Vector3 objectSize = new Vector3(0.3f, 0.5f, 0.3f);
-
     private ScoreManager sm;
 
-    private List<NetworkObject> currentObjects = new List<NetworkObject>();
-    public const int ObjectLimit = 10;
-
-    private void Start()
+    void Start()
     {
         sm = FindObjectOfType<ScoreManager>();
     }
@@ -43,7 +36,7 @@ public class ObjectManager : NetworkBehaviour
     }
 
     // Attempts to spawn an object at "x" and "y".
-    public bool SpawnObject(GameObject prefab, Vector3 spawnPosition)
+    public new bool SpawnObject(GameObject prefab, Vector3 spawnPosition)
     {
         Debug.Log(spawnPosition);
 
@@ -60,10 +53,10 @@ public class ObjectManager : NetworkBehaviour
 
                 if (hasGround && groundCast.collider.tag == "Ground")
                 {
-                    spawnPosition.Set(spawnPosition.x, groundCast.point.y + (objectSize.y / 2), spawnPosition.z);
+                    spawnPosition.Set(spawnPosition.x, groundCast.point.y + (spawnBoundaries.y / 2), spawnPosition.z);
 
                     // Checks to make sure that there is enough space to spawn the object
-                    Collider[] overlap = Physics.OverlapBox(spawnPosition, new Vector3(objectSize.x, objectSize.y * 0.49f, objectSize.z));
+                    Collider[] overlap = Physics.OverlapBox(spawnPosition, new Vector3(spawnBoundaries.x, spawnBoundaries.y * 0.49f, spawnBoundaries.z));
                     if (overlap.Length < 1)
                     {
                         canSpawn = true;
@@ -105,21 +98,5 @@ public class ObjectManager : NetworkBehaviour
             return true;
         }
         return false;
-    }
-
-    // Returns a random spawn position.
-    private Vector3 getRandomSpawnPosition()
-    {
-        return new Vector3(
-                    Random.Range(20f, -20f),
-                    Random.Range(1f, 5f),
-                    Random.Range(20f, -20f));
-    }
-
-    // Despawns the specified object and removes it from the list of current objects.
-    public void DespawnObject(NetworkObject spawnedObject)
-    {
-        Runner.Despawn(spawnedObject);
-        currentObjects.Remove(spawnedObject);
     }
 }
