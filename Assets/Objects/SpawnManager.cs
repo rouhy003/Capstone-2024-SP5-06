@@ -27,6 +27,27 @@ public class SpawnManager : NetworkBehaviour
         gameManager = FindObjectOfType<GameManager>();
     }
 
+    // Called every fixed update.
+    public override void FixedUpdateNetwork()
+    {
+        // Attempts to spawn an object if the limit has yet to be reached.
+        if (currentObjects.Count < ObjectLimit)
+        {
+            Vector3 spawnPosition = getRandomSpawnPosition();
+
+            bool objectSpawned = false;
+            int spawnAttemptsRemaining = 10;
+
+            // Repeats the spawn attempt until either the object spawns successfully or there are no more remaining attempts.
+            while (!objectSpawned && spawnAttemptsRemaining > 0)
+            {
+                spawnPosition = getRandomSpawnPosition();
+                objectSpawned = SpawnObject(spawnPrefabs[Random.Range(0, spawnPrefabs.Length)], spawnPosition);
+                spawnAttemptsRemaining--;
+            }
+        }
+    }
+
     // Attempts to spawn the specified prefab at the specified spawn position.
     public bool SpawnObject(GameObject prefab, Vector3 spawnPosition)
     {
