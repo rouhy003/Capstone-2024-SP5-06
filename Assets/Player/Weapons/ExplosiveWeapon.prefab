@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8362486392570018292}
   - component: {fileID: 7023796954883914463}
   - component: {fileID: 9110304900163202025}
+  - component: {fileID: 2971136062998852441}
   m_Layer: 0
   m_Name: ExplosiveWeapon
   m_TagString: Untagged
@@ -112,6 +113,7 @@ MonoBehaviour:
   NetworkedBehaviours:
   - {fileID: 5543704596836299196}
   - {fileID: 9110304900163202025}
+  - {fileID: 2971136062998852441}
 --- !u!54 &7023796954883914463
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -161,6 +163,19 @@ MonoBehaviour:
     Position: 0.01
     Rotation: 0.01
     Scale: 0.01
+--- !u!114 &2971136062998852441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 679194117442714353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c80ed3224fd4d00419575a3600a31ad1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnsGrounded: 1
 --- !u!1 &2326739675215430691
 GameObject:
   m_ObjectHideFlags: 0
