@@ -321,4 +321,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c80ed3224fd4d00419575a3600a31ad1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnsGrounded: 0
+  spawnsGrounded: 1
