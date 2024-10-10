@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 973912997506939382}
   - component: {fileID: 5241082677829627232}
+  - component: {fileID: 5268249347754237953}
   - component: {fileID: 9192020704681205484}
   m_Layer: 0
   m_Name: ObjectManager
@@ -49,6 +50,22 @@ MonoBehaviour:
   - {fileID: 6420634983098379249, guid: 15f83b02f261f034385b64d4ff296abe, type: 3}
   - {fileID: 6821589715336073266, guid: 81372e63b076d1d49beef657e112283d, type: 3}
   spawnBoundaries: {x: 0.3, y: 0.5, z: 0.3}
+--- !u!114 &5268249347754237953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1534026317029940772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70992dfdbdd247746b2750ae1c94f0cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPrefabs:
+  - {fileID: 6977935320179673830, guid: 1e021d72513ddb04395fcf2aa020a332, type: 3}
+  - {fileID: 679194117442714353, guid: 49e2dbd2b2e188f4eae2fdbb7a3c61aa, type: 3}
+  spawnBoundaries: {x: 0.3, y: 0.5, z: 0.3}
 --- !u!114 &9192020704681205484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,3 +84,4 @@ MonoBehaviour:
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 5241082677829627232}
+  - {fileID: 5268249347754237953}
