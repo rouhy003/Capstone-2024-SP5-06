@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 4671655188908024315}
   - component: {fileID: 7911590965196520554}
   - component: {fileID: 2912406143330085883}
+  - component: {fileID: 995822091068402075}
   m_Layer: 0
   m_Name: BouncyWeapon
   m_TagString: Untagged
@@ -143,6 +144,7 @@ MonoBehaviour:
   NetworkedBehaviours:
   - {fileID: 6856641278013580128}
   - {fileID: 2912406143330085883}
+  - {fileID: 995822091068402075}
 --- !u!54 &7911590965196520554
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -192,6 +194,19 @@ MonoBehaviour:
     Position: 0.01
     Rotation: 0.01
     Scale: 0.01
+--- !u!114 &995822091068402075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4345866592698979647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c80ed3224fd4d00419575a3600a31ad1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnsGrounded: 1
 --- !u!1001 &2182231162440069554
 PrefabInstance:
   m_ObjectHideFlags: 0
