@@ -11,10 +11,6 @@ public class SpawnManager : NetworkBehaviour
     [SerializeField]
     public GameObject[] spawnPrefabs;
 
-    // Represent's the object's size to calculate spawning space
-    [SerializeField]
-    protected Vector3 spawnBoundaries = new Vector3(0.3f, 0.5f, 0.3f);
-
     protected List<NetworkObject> currentObjects = new List<NetworkObject>();
 
     [SerializeField]
@@ -56,6 +52,9 @@ public class SpawnManager : NetworkBehaviour
         SpawnableObject prop = prefab.GetComponent<SpawnableObject>();
         if (prop != null)
         {
+            Vector3 spawnBoundaries = prop.getSpawnBoundaries();
+            Debug.Log(spawnBoundaries + " " + gameObject.name);
+
             // Grounded object spawning
             if (prop.spawnsOnGround())
             {

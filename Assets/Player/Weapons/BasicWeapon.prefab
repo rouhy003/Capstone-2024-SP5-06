@@ -322,3 +322,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnsGrounded: 1
+  spawnBoundaries: {x: 0.5, y: 0.5, z: 0.5}

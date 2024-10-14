@@ -335,6 +335,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnsGrounded: 1
+  spawnBoundaries: {x: 0.3, y: 0.5, z: 0.3}
 --- !u!1001 &5070409649778955630
 PrefabInstance:
   m_ObjectHideFlags: 0
