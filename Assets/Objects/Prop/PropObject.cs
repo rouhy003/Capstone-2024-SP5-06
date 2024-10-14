@@ -16,6 +16,7 @@ public class PropObject : NetworkBehaviour
     public override void Spawned()
     {
         life = TickTimer.CreateFromSeconds(Runner, objectLifetime);
+        sm = FindObjectOfType<ScoreManager>();
     }
 
     public override void FixedUpdateNetwork()
