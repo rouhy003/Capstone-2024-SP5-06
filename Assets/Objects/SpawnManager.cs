@@ -99,7 +99,7 @@ public class SpawnManager : NetworkBehaviour
 
         if (canSpawn)
         {
-            NetworkObject spawnedObject = Runner.Spawn(prefab, spawnPosition);
+            NetworkObject spawnedObject = Runner.Spawn(prefab, spawnPosition, getRandomRotation());
             currentObjects.Add(spawnedObject);
             return true;
         }
@@ -110,9 +110,18 @@ public class SpawnManager : NetworkBehaviour
     protected Vector3 getRandomSpawnPosition()
     {
         return new Vector3(
-                    Random.Range(20f, -20f),
-                    Random.Range(1f, 5f),
-                    Random.Range(20f, -20f));
+            Random.Range(20f, -20f),
+            Random.Range(1f, 5f),
+            Random.Range(20f, -20f));
+    }
+
+    protected Quaternion getRandomRotation()
+    {
+        return new Quaternion(
+            0f,
+            Random.rotation.y,
+            0f,
+            Random.rotation.w);
     }
 
     // Despawns the specified object and removes it from the list of current objects.
