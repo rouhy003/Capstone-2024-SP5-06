@@ -6,7 +6,7 @@ using UnityEngine;
 public class ExplosiveProjectile : PhysxBall
 {
     private float explosionRadius = 1.25f;
-    private float explosionPower = 10f;
+    private float explosionPower = 20f;
 
     void OnCollisionEnter(Collision collision)
     {
