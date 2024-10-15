@@ -7,7 +7,10 @@ public class PropObject : NetworkBehaviour
     private bool hasBeenStruck = false;
 
     [Networked] TickTimer life { get; set; }
-    [SerializeField] private const int objectLifetime = 3;
+
+    [SerializeField] private float objectLifetime = 3;
+    [SerializeField] private float knockdownTime = 0;
+
     [SerializeField] private int pointValue = 1;
     [SerializeField] private bool addPoints = true;
 
@@ -41,7 +44,7 @@ public class PropObject : NetworkBehaviour
             {
                 sm.ChangeP2ScoreRPC(addPoints, pointValue);
             }
-            life = TickTimer.CreateFromSeconds(Runner, 0.5f);
+            life = TickTimer.CreateFromSeconds(Runner, knockdownTime);
         }
     }
 

@@ -319,6 +319,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e627cdb4219bab04681409c44d2e7118, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectLifetime: 3
+  knockdownTime: 0.5
   pointValue: 1
   addPoints: 1
   sm: {fileID: 0}
