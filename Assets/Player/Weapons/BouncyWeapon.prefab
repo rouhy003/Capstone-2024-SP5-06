@@ -124,7 +124,7 @@ MonoBehaviour:
   FirePoint: {fileID: 7423070286318865208}
   CoolDownTime: 0.6
   isVR: 1
-  playerHolding: 0
+  playerHolding: 1
   projectile: {fileID: 4685951720128068931, guid: 79ea76560549ab7499074e1f55c0c897, type: 3}
   fireSound: {fileID: 9120232387925777549}
 --- !u!114 &4671655188908024315
