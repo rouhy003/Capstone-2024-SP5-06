@@ -49,7 +49,7 @@ MonoBehaviour:
   spawnPrefabs:
   - {fileID: 6420634983098379249, guid: 15f83b02f261f034385b64d4ff296abe, type: 3}
   - {fileID: 6821589715336073266, guid: 81372e63b076d1d49beef657e112283d, type: 3}
-  spawnBoundaries: {x: 0.3, y: 0.5, z: 0.3}
+  ObjectLimit: 20
 --- !u!114 &5268249347754237953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,7 +66,7 @@ MonoBehaviour:
   - {fileID: 6977935320179673830, guid: 1e021d72513ddb04395fcf2aa020a332, type: 3}
   - {fileID: 679194117442714353, guid: 49e2dbd2b2e188f4eae2fdbb7a3c61aa, type: 3}
   - {fileID: 4345866592698979647, guid: 444c0b2a615a00d448b001d77901d4aa, type: 3}
-  spawnBoundaries: {x: 0.3, y: 0.5, z: 0.3}
+  ObjectLimit: 4
 --- !u!114 &9192020704681205484
 MonoBehaviour:
   m_ObjectHideFlags: 0
