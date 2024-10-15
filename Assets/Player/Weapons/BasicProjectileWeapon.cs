@@ -6,6 +6,7 @@ using Fusion;
 public class BasicProjectileWeapon : GenericWeapon
 {
     [SerializeField] private GameObject projectile;
+    [SerializeField] private AudioSource fireSound;
 
     // Start is called before the first frame update
     new void Start()
@@ -24,6 +25,7 @@ public class BasicProjectileWeapon : GenericWeapon
             PhysxBall p = proj.GetComponent<PhysxBall>();
             p.player = playerHolding;
             p.Fire(FirePoint.position, GetFiringRayOrigin() * shootSpeed);
+            fireSound.Play();
         }
     }
 }
