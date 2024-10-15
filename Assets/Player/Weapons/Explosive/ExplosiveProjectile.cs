@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class ExplosiveProjectile : PhysxBall
 {
-    [SerializeField] private float explosionRadius = 1.5f;
-    [SerializeField] private float explosionPower = 100f;
+    private float explosionRadius = 1.25f;
+    private float explosionPower = 10f;
 
     void OnCollisionEnter(Collision collision)
     {
