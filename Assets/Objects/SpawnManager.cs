@@ -14,7 +14,7 @@ public class SpawnManager : NetworkBehaviour
     protected List<NetworkObject> currentObjects = new List<NetworkObject>();
 
     [SerializeField]
-    protected const int ObjectLimit = 10;
+    protected int ObjectLimit = 10;
 
 
     // Start is called before the first frame update
@@ -32,7 +32,7 @@ public class SpawnManager : NetworkBehaviour
             Vector3 spawnPosition = getRandomSpawnPosition();
 
             bool objectSpawned = false;
-            int spawnAttemptsRemaining = 10;
+            int spawnAttemptsRemaining = 50;
 
             // Repeats the spawn attempt until either the object spawns successfully or there are no more remaining attempts.
             while (!objectSpawned && spawnAttemptsRemaining > 0)
