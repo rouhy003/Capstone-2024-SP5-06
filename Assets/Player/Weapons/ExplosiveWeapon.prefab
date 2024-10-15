@@ -91,7 +91,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootSpeed: 10
   FirePoint: {fileID: 6252353649064651836}
-  CoolDownTime: 2
+  CoolDownTime: 1
   isVR: 1
   playerHolding: 1
   projectile: {fileID: 8450968435470632612, guid: 3e074ef9798db2e4ba1d0966a8df6bd8, type: 3}
