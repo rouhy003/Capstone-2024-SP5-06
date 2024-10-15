@@ -10,9 +10,14 @@ public class MasterController : MonoBehaviour
 
     public bool isWeaponHeld = false;
     public bool leftHand = false;
+
+    public Transform handAnchor;
+    public GameObject ovrRig;
     
     public float CoolDownTime = 2;
-    
+
+    public bool isSpaceSyncing;
+
     bool isJoined = false;
     
     StartMenu sm;    
@@ -24,13 +29,31 @@ public class MasterController : MonoBehaviour
 
     void Update()
     {
+        if (isSpaceSyncing)
+        {
+            ovrRig.transform.position -= new Vector3(OVRInput.Get(OVRInput.RawAxis2D.RThumbstick).x/100, ovrRig.transform.position.y, OVRInput.Get(OVRInput.RawAxis2D.RThumbstick).y/100);
+            Quaternion r = ovrRig.transform.rotation;
+            ovrRig.transform.rotation = new Quaternion(r.x, r.y + OVRInput.Get(OVRInput.RawAxis2D.LThumbstick).y/50, r.z, r.w);
+        }
+
+        gameObject.transform.position = handAnchor.transform.position;
+        gameObject.transform.rotation = handAnchor.transform.rotation;
+
         //Handles input for joining a game.
-        if (!isJoined)
+        if (!isJoined && !isSpaceSyncing)
         {
             if (OVRInput.Get(OVRInput.Button.Three) || OVRInput.Get(OVRInput.Button.One))
             {
                 isJoined = true;
                 sm.StartSharedVR();
+            }
+        }
+        
+        if (isSpaceSyncing)
+        {
+            if (OVRInput.Get(OVRInput.Button.Three) || OVRInput.Get(OVRInput.Button.One))
+            {
+                isSpaceSyncing = false;
             }
         }
 
