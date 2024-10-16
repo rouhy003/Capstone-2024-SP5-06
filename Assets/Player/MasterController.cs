@@ -40,22 +40,9 @@ public class MasterController : MonoBehaviour
             catch{}
         }
 
-        if (isSpaceSyncing)
-        {
-            ovrRig.transform.position -= new Vector3(OVRInput.Get(OVRInput.RawAxis2D.RThumbstick).x/100, ovrRig.transform.position.y, OVRInput.Get(OVRInput.RawAxis2D.RThumbstick).y/100);
-            
-            Quaternion r = ovrRig.transform.rotation;
-            ovrRig.transform.rotation = new Quaternion(r.x, r.y + OVRInput.Get(OVRInput.RawAxis2D.LThumbstick).y/50, r.z, r.w);
+        SyncSpace();
 
-            if (mr != null)
-            {
-                mr.transform.position -= new Vector3(OVRInput.Get(OVRInput.RawAxis2D.RThumbstick).x / 100, mr.transform.position.y, OVRInput.Get(OVRInput.RawAxis2D.RThumbstick).y / 100);
-
-                Quaternion rm = mr.transform.rotation;
-                mr.transform.rotation = new Quaternion(rm.x, rm.y + OVRInput.Get(OVRInput.RawAxis2D.LThumbstick).y / 50, rm.z, rm.w);
-            }
-        }
-
+        //Updates the controller position to match where it actually is
         gameObject.transform.position = handAnchor.transform.position;
         gameObject.transform.rotation = handAnchor.transform.rotation;
 
@@ -68,50 +55,11 @@ public class MasterController : MonoBehaviour
                 sm.StartSharedVR();
             }
         }
-        
-        if (isSpaceSyncing)
-        {
-            if (OVRInput.Get(OVRInput.Button.Three) || OVRInput.Get(OVRInput.Button.One))
-            {
-                isSpaceSyncing = false;
-            }
-        }
 
         //Handles controller input if a weapon is overlapped.
         if ( puw != null)
         {
-            //Left controller
-            if (leftHand)
-            {
-                if (OVRInput.Get(OVRInput.Button.Four))
-                {
-                    PutDownWeapon();
-                }
-                else if (OVRInput.Get(OVRInput.Button.Three))
-                {
-                    PickUpWeapon();
-                }
-                else if (OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger) > 0 && leftHand)
-                {
-                    FireWeapon();
-                }
-            }
-            //Right controller
-            else
-            {
-                if (OVRInput.Get(OVRInput.Button.Two))
-                {
-                    PutDownWeapon();
-                }
-                else if (OVRInput.Get(OVRInput.Button.One))
-                {
-                    PickUpWeapon();
-                }
-                else if (OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger) > 0 && !leftHand)
-                {
-                    FireWeapon();
-                }
-            }
+            HandleInput();
         }
     }
 
@@ -168,4 +116,68 @@ public class MasterController : MonoBehaviour
         }
     }
 
+    //Repositions the VR rig and Room Scan depending on the thumbstick inputs
+    private void SyncSpace()
+    {
+        if (isSpaceSyncing)
+        {
+            //Right thumbstick changes the X and Z position of the VR rig
+            ovrRig.transform.position -= new Vector3(OVRInput.Get(OVRInput.RawAxis2D.RThumbstick).x / 100, ovrRig.transform.position.y, OVRInput.Get(OVRInput.RawAxis2D.RThumbstick).y / 100);
+
+            //Left thumbstick changes the Y rotation of the VR rig
+            Quaternion r = ovrRig.transform.rotation;
+            ovrRig.transform.rotation = new Quaternion(r.x, r.y + OVRInput.Get(OVRInput.RawAxis2D.LThumbstick).y / 50, r.z, r.w);
+
+            if (mr != null)
+            {
+                //Right thumbstick changes the X and Z position of the room scan as well
+                mr.transform.position -= new Vector3(OVRInput.Get(OVRInput.RawAxis2D.RThumbstick).x / 100, mr.transform.position.y, OVRInput.Get(OVRInput.RawAxis2D.RThumbstick).y / 100);
+
+                //Left thumbstick changes the Y rotation of the room scan as well
+                Quaternion rm = mr.transform.rotation;
+                mr.transform.rotation = new Quaternion(rm.x, rm.y + OVRInput.Get(OVRInput.RawAxis2D.LThumbstick).y / 50, rm.z, rm.w);
+            }
+
+            if (OVRInput.Get(OVRInput.Button.Three) || OVRInput.Get(OVRInput.Button.One))
+            {
+                isSpaceSyncing = false;
+            }
+        }
+    }
+
+    private void HandleInput()
+    {
+        //Left controller
+        if (leftHand)
+        {
+            if (OVRInput.Get(OVRInput.Button.Four))
+            {
+                PutDownWeapon();
+            }
+            else if (OVRInput.Get(OVRInput.Button.Three))
+            {
+                PickUpWeapon();
+            }
+            else if (OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger) > 0 && leftHand)
+            {
+                FireWeapon();
+            }
+        }
+        //Right controller
+        else
+        {
+            if (OVRInput.Get(OVRInput.Button.Two))
+            {
+                PutDownWeapon();
+            }
+            else if (OVRInput.Get(OVRInput.Button.One))
+            {
+                PickUpWeapon();
+            }
+            else if (OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger) > 0 && !leftHand)
+            {
+                FireWeapon();
+            }
+        }
+    }
 }
