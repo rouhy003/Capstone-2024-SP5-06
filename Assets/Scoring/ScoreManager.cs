@@ -6,6 +6,11 @@ using TMPro;
 
 public class ScoreManager : NetworkBehaviour
 {
+    private AudioSource m_scoreManagerAudio;
+    [SerializeField] private AudioClip m_startGame;
+    [SerializeField] private AudioClip m_scorePositive;
+    [SerializeField] private AudioClip m_scoreNegative;
+
     [Networked, OnChangedRender(nameof(ChangeP1Score))]
     [SerializeField] private int player1Score { get; set; }
 
@@ -23,6 +28,8 @@ public class ScoreManager : NetworkBehaviour
             player1Score = 0;
             player2Score = 0;
         }
+        m_scoreManagerAudio.clip = m_startGame;
+        m_scoreManagerAudio.Play();
     }
 
     //Updates the UI text for player 1s score.
@@ -45,10 +52,14 @@ public class ScoreManager : NetworkBehaviour
         if (increase)
         {
             player1Score += amount;
+            m_scoreManagerAudio.clip = m_scorePositive;
+            m_scoreManagerAudio.Play();
         }
         else
         {
             player1Score -= amount;
+            m_scoreManagerAudio.clip = m_scoreNegative;
+            m_scoreManagerAudio.Play();
         }
         ChangeP1Score();
     }
@@ -61,10 +72,14 @@ public class ScoreManager : NetworkBehaviour
         if (increase)
         {
             player2Score += amount;
+            m_scoreManagerAudio.clip = m_scorePositive;
+            m_scoreManagerAudio.Play();
         }
         else
         {
             player2Score -= amount;
+            m_scoreManagerAudio.clip = m_scoreNegative;
+            m_scoreManagerAudio.Play();
         }
         ChangeP2Score();
     }
