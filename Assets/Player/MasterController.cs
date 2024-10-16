@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
+using Meta.XR.MRUtilityKit;
 
 public class MasterController : MonoBehaviour
 {
@@ -20,7 +21,8 @@ public class MasterController : MonoBehaviour
 
     bool isJoined = false;
     
-    StartMenu sm;    
+    StartMenu sm;
+    GameObject mr;
 
     private void Start()
     {
@@ -29,11 +31,29 @@ public class MasterController : MonoBehaviour
 
     void Update()
     {
+        if (mr == null)
+        {
+            try
+            {
+                mr = FindObjectOfType<MRUKRoom>().gameObject;
+            }
+            catch{}
+        }
+
         if (isSpaceSyncing)
         {
             ovrRig.transform.position -= new Vector3(OVRInput.Get(OVRInput.RawAxis2D.RThumbstick).x/100, ovrRig.transform.position.y, OVRInput.Get(OVRInput.RawAxis2D.RThumbstick).y/100);
+            
             Quaternion r = ovrRig.transform.rotation;
             ovrRig.transform.rotation = new Quaternion(r.x, r.y + OVRInput.Get(OVRInput.RawAxis2D.LThumbstick).y/50, r.z, r.w);
+
+            if (mr != null)
+            {
+                mr.transform.position -= new Vector3(OVRInput.Get(OVRInput.RawAxis2D.RThumbstick).x / 100, mr.transform.position.y, OVRInput.Get(OVRInput.RawAxis2D.RThumbstick).y / 100);
+
+                Quaternion rm = mr.transform.rotation;
+                mr.transform.rotation = new Quaternion(rm.x, rm.y + OVRInput.Get(OVRInput.RawAxis2D.LThumbstick).y / 50, rm.z, rm.w);
+            }
         }
 
         gameObject.transform.position = handAnchor.transform.position;
