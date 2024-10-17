@@ -5,10 +5,11 @@ using UnityEngine;
 public class PhysxBall : NetworkBehaviour
 {
     private NetworkRigidbody3D _rigidbody;
-    [SerializeField]
 
     [Networked] TickTimer life { get; set; }
-    [SerializeField] private const int lifetime = 3;
+    [SerializeField] private int lifetime = 3;
+
+    [SerializeField] private bool despawnOnCollision = false;
 
     public int player;
 
@@ -46,6 +47,11 @@ public class PhysxBall : NetworkBehaviour
         if (prop != null)
         {
             prop.Knockdown(player);
+        }
+        
+        if (despawnOnCollision)
+        {
+            Despawn();
         }
     }
 }
