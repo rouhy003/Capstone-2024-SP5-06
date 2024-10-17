@@ -6,6 +6,7 @@ public class PropObject : NetworkBehaviour
 {
     private PropSound propSound;
     private PropState propState;
+    private ParticleSpawner particleSpawner;
 
     [Networked] TickTimer life { get; set; }
     [SerializeField] private float objectLifetime = 3;
@@ -23,6 +24,7 @@ public class PropObject : NetworkBehaviour
         sm = FindObjectOfType<ScoreManager>();
         propSound = GetComponent<PropSound>();
         propState = GetComponent<PropState>();
+        particleSpawner = GetComponent<ParticleSpawner>();
     }
 
     public override void FixedUpdateNetwork()
@@ -66,6 +68,9 @@ public class PropObject : NetworkBehaviour
     // Despawns the object through the current scene's object manager.
     private void Despawn()
     {
+        // Spawns a particle on despawn, if it has one
+        if (particleSpawner != null) particleSpawner.SpawnParticle(transform.position);
+
         FindObjectOfType<ObjectManager>().DespawnObject(Object);
     }
 }
