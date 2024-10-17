@@ -225,6 +225,7 @@ GameObject:
   - component: {fileID: 8159127227503669306}
   - component: {fileID: 2129208637450553442}
   - component: {fileID: 3205923348645970472}
+  - component: {fileID: 2483693393680298817}
   m_Layer: 0
   m_Name: ExplosiveProjectile
   m_TagString: Untagged
@@ -338,6 +339,7 @@ MonoBehaviour:
   NetworkedBehaviours:
   - {fileID: 8159127227503669306}
   - {fileID: 3205923348645970472}
+  - {fileID: 2483693393680298817}
 --- !u!114 &3205923348645970472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -354,4 +356,17 @@ MonoBehaviour:
   lifetime: 3
   despawnOnCollision: 1
   player: 0
-  explosionPrefab: {fileID: 7593022840479383294, guid: 94c5bd8308cf71c4687017a89a410217, type: 3}
+  particleSpawner: {fileID: 0}
+--- !u!114 &2483693393680298817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8450968435470632612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a239db6d962f45c4c9c1ff6d0c65128e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particlePrefab: {fileID: 7593022840479383294, guid: 94c5bd8308cf71c4687017a89a410217, type: 3}

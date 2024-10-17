@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class ExplosiveProjectile : PhysxBall
 {
-    [SerializeField] private GameObject explosionPrefab;
+    private ParticleSpawner particleSpawner;
 
     private float explosionRadius = 1.25f;
     private float explosionPower = 20f;
@@ -14,6 +14,7 @@ public class ExplosiveProjectile : PhysxBall
     protected override void Awake()
     {
         base.Awake();
+        particleSpawner = GetComponent<ParticleSpawner>();
     }
 
     // Explodes the projectile
@@ -40,7 +41,9 @@ public class ExplosiveProjectile : PhysxBall
             {
                 prop.Knockdown(player);
             }
-            Runner.Spawn(explosionPrefab, transform.position);
+
+            // Spawns the explosion particle from the spawner.
+            particleSpawner.SpawnParticle(transform.position);
         }
     }
 
