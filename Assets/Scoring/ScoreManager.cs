@@ -20,6 +20,11 @@ public class ScoreManager : NetworkBehaviour
     public TextMeshProUGUI p1score;
     public TextMeshProUGUI p2score;
 
+    void Start()
+    {
+        m_scoreManagerAudio = GetComponentInChildren<AudioSource>();
+    }
+
     //Sets the initial score of both players
     public void InitialiseGame()
     {
