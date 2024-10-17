@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class PropObject : NetworkBehaviour
 {
     private PropSound propSound;
+    private PropState propState;
 
     [Networked] TickTimer life { get; set; }
     [SerializeField] private float objectLifetime = 3;
@@ -21,6 +22,7 @@ public class PropObject : NetworkBehaviour
         life = TickTimer.CreateFromSeconds(Runner, objectLifetime);
         sm = FindObjectOfType<ScoreManager>();
         propSound = GetComponent<PropSound>();
+        propState = GetComponent<PropState>();
     }
 
     public override void FixedUpdateNetwork()
@@ -49,6 +51,9 @@ public class PropObject : NetworkBehaviour
 
             // Plays a hit sound, if it has one.
             if (propSound != null) propSound.PlayHitSound();
+
+            // Changes the prop's mesh, if it changes state.
+            if (propState != null) propState.UseDamageMesh();
 
             // Sets a timer for the object's remaining lifetime.
             // Have "knockdownTime" set to 0 to have objects despawn immediately upon impact.
