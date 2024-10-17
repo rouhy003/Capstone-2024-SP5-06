@@ -55,6 +55,10 @@ MonoBehaviour:
   gameTime: 20
   preGameTime: 10
   postGameTime: 15
+  m_fanfares:
+  - {fileID: 8300000, guid: 8fbca9363144c9f4a96b6f0a1d62f935, type: 3}
+  - {fileID: 8300000, guid: bd258c0091ec3f84f85fdbf2cbfa9c94, type: 3}
+  - {fileID: 8300000, guid: 8a6a0d4b22ba7f943b59d459d8ecbd20, type: 3}
 --- !u!114 &2717139374975248107
 MonoBehaviour:
   m_ObjectHideFlags: 0
