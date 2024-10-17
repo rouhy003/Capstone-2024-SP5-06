@@ -6,6 +6,9 @@ public class PhysxBall : NetworkBehaviour
 {
     private NetworkRigidbody3D _rigidbody;
 
+    protected AudioSource audioSource;
+    [SerializeField] protected AudioClip m_bounceSound;
+
     [Networked] TickTimer life { get; set; }
     [SerializeField] private int lifetime = 3;
 
@@ -16,6 +19,7 @@ public class PhysxBall : NetworkBehaviour
     protected void Awake()
     {
         _rigidbody = GetComponent<NetworkRigidbody3D>();
+        audioSource = GetComponentInChildren<AudioSource>();
     }
 
     public override void FixedUpdateNetwork()
@@ -48,10 +52,22 @@ public class PhysxBall : NetworkBehaviour
         {
             prop.Knockdown(player);
         }
-        
+
+        PlayCollisionSound();
+
         if (despawnOnCollision)
         {
             Despawn();
+        }
+    }
+
+    // Plays the sound effect upon colliding with a surface, if that sound effect exists.
+    private void PlayCollisionSound()
+    {
+        if (!despawnOnCollision && m_bounceSound != null)
+        {
+            audioSource.clip = m_bounceSound;
+            audioSource.Play();
         }
     }
 }
