@@ -36,7 +36,7 @@ public class PhysxBall : NetworkBehaviour
         life = TickTimer.CreateFromSeconds(Runner, lifetime);
     }
 
-    public void Despawn()
+    public virtual void Despawn()
     {
         Runner.Despawn(Object);
     }
