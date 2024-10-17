@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 9085496565895151603}
   - component: {fileID: 3851843275772144786}
   - component: {fileID: 1170546683038371727}
+  - component: {fileID: 1010140712284231411}
   m_Layer: 0
   m_Name: Target
   m_TagString: Untagged
@@ -78,6 +79,7 @@ MonoBehaviour:
   NetworkedBehaviours:
   - {fileID: 3851843275772144786}
   - {fileID: 1170546683038371727}
+  - {fileID: 1010140712284231411}
 --- !u!114 &3851843275772144786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,6 +111,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnsGrounded: 0
   spawnBoundaries: {x: 0.5, y: 0.5, z: 0.5}
+--- !u!114 &1010140712284231411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6821589715336073266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a239db6d962f45c4c9c1ff6d0c65128e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particlePrefab: {fileID: 7593022840479383294, guid: c7441e2b9e56e4044bd9293d2faca056, type: 3}
 --- !u!1001 &6925589004581664625
 PrefabInstance:
   m_ObjectHideFlags: 0
