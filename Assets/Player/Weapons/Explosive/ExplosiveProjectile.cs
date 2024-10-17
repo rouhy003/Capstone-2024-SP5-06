@@ -1,3 +1,4 @@
+using Fusion;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -7,11 +8,6 @@ public class ExplosiveProjectile : PhysxBall
 {
     private float explosionRadius = 1.25f;
     private float explosionPower = 20f;
-
-    void OnCollisionEnter(Collision collision)
-    {
-        Explode();
-    }
 
     // Explodes the projectile
     public void Explode()
@@ -38,6 +34,11 @@ public class ExplosiveProjectile : PhysxBall
                 prop.Knockdown(player);
             }
         }
-        Runner.Despawn(Object);
+    }
+
+    public override void Despawn()
+    {
+        Explode();
+        base.Despawn();
     }
 }

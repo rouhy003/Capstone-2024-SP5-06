@@ -222,5 +222,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifetime: 3
-  despawnOnCollision: 0
+  despawnOnCollision: 1
   player: 0
