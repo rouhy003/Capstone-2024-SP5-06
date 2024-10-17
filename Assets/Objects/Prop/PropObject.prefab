@@ -152,6 +152,9 @@ PrefabInstance:
       addedObject: {fileID: 7975463405586762366}
     - targetCorrespondingSourceObject: {fileID: 7825407092041201027, guid: 7a3e183a6a1fc3b4eb311cae7f670d80, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 842835805035189966}
+    - targetCorrespondingSourceObject: {fileID: 7825407092041201027, guid: 7a3e183a6a1fc3b4eb311cae7f670d80, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 3712965278926517488}
     - targetCorrespondingSourceObject: {fileID: 7825407092041201027, guid: 7a3e183a6a1fc3b4eb311cae7f670d80, type: 3}
       insertIndex: -1
@@ -279,6 +282,7 @@ MonoBehaviour:
   NetworkedBehaviours:
   - {fileID: 6022319614438794124}
   - {fileID: 7975463405586762366}
+  - {fileID: 842835805035189966}
   - {fileID: 3712965278926517488}
 --- !u!114 &7975463405586762366
 MonoBehaviour:
@@ -292,12 +296,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e627cdb4219bab04681409c44d2e7118, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitSound: {fileID: 3262189445670029858}
   objectLifetime: 3
   knockdownTime: 0.5
   pointValue: 1
   addPoints: 1
   sm: {fileID: 0}
+--- !u!114 &842835805035189966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6420634983098379249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f480b31b3dfa8904295451c467fefe94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitSound: {fileID: 3262189445670029858}
 --- !u!114 &3712965278926517488
 MonoBehaviour:
   m_ObjectHideFlags: 0

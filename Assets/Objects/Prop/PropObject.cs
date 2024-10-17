@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class PropObject : NetworkBehaviour
 {
-    [SerializeField] private AudioSource hitSound;
+    private PropSound propSound;
 
     [Networked] TickTimer life { get; set; }
     [SerializeField] private float objectLifetime = 3;
@@ -20,6 +20,7 @@ public class PropObject : NetworkBehaviour
     {
         life = TickTimer.CreateFromSeconds(Runner, objectLifetime);
         sm = FindObjectOfType<ScoreManager>();
+        propSound = GetComponent<PropSound>();
     }
 
     public override void FixedUpdateNetwork()
@@ -46,7 +47,8 @@ public class PropObject : NetworkBehaviour
                 sm.ChangeP2ScoreRPC(addPoints, pointValue);
             }
 
-            hitSound.Play();
+            // Plays a hit sound, if it has one.
+            if (propSound != null) propSound.PlayHitSound();
 
             // Sets a timer for the object's remaining lifetime.
             // Have "knockdownTime" set to 0 to have objects despawn immediately upon impact.
