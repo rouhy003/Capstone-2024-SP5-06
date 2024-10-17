@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8838943281671393143}
   - component: {fileID: 4110461799773829270}
   - component: {fileID: 2717139374975248107}
+  - component: {fileID: 302417706709075634}
   - component: {fileID: 8147501138924039138}
   m_Layer: 0
   m_Name: GameManager
@@ -55,10 +56,6 @@ MonoBehaviour:
   gameTime: 20
   preGameTime: 10
   postGameTime: 15
-  m_fanfares:
-  - {fileID: 8300000, guid: 8fbca9363144c9f4a96b6f0a1d62f935, type: 3}
-  - {fileID: 8300000, guid: bd258c0091ec3f84f85fdbf2cbfa9c94, type: 3}
-  - {fileID: 8300000, guid: 8a6a0d4b22ba7f943b59d459d8ecbd20, type: 3}
 --- !u!114 &2717139374975248107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71,13 +68,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bbbdcef7d1f4b943814b1a9d0613204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_startGame: {fileID: 8300000, guid: 8fbca9363144c9f4a96b6f0a1d62f935, type: 3}
-  m_scorePositive: {fileID: 8300000, guid: 5b9bb3eef9900a54dbc85f0bf6270f39, type: 3}
-  m_scoreNegative: {fileID: 8300000, guid: 5063731628f2ecd41838db9031ef5d45, type: 3}
   _player1Score: 0
   _player2Score: 0
   p1score: {fileID: 0}
   p2score: {fileID: 0}
+--- !u!114 &302417706709075634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1024927267455419457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2321d20e09854b45b61f5055125ab0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_fanfares:
+  - {fileID: 8300000, guid: 8fbca9363144c9f4a96b6f0a1d62f935, type: 3}
+  - {fileID: 8300000, guid: bd258c0091ec3f84f85fdbf2cbfa9c94, type: 3}
+  - {fileID: 8300000, guid: 8a6a0d4b22ba7f943b59d459d8ecbd20, type: 3}
+  m_scoreSounds:
+  - {fileID: 8300000, guid: 5b9bb3eef9900a54dbc85f0bf6270f39, type: 3}
+  - {fileID: 8300000, guid: 5063731628f2ecd41838db9031ef5d45, type: 3}
 --- !u!114 &8147501138924039138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -97,6 +110,7 @@ MonoBehaviour:
   NetworkedBehaviours:
   - {fileID: 4110461799773829270}
   - {fileID: 2717139374975248107}
+  - {fileID: 302417706709075634}
 --- !u!1 &2849738297898309290
 GameObject:
   m_ObjectHideFlags: 0

@@ -30,12 +30,11 @@ public class GameManager : NetworkBehaviour
     public int postGameTime = 15;
 
     ScoreManager sm;
-    private AudioSource m_UIAudio;
-    [SerializeField] AudioClip[] m_fanfares;
+    SoundManager soundManager;
 
     private void Start()
     {
-        m_UIAudio = GetComponentInChildren<AudioSource>();
+        soundManager = GetComponentInChildren<SoundManager>();
     }
 
     //Constrocts the GameManager as a singleton.
@@ -126,8 +125,7 @@ public class GameManager : NetworkBehaviour
                 gameUI.SetActive(true);
                 Phase = GamePhase.Running;
 
-                m_UIAudio.clip = m_fanfares[0];
-                m_UIAudio.Play();
+                soundManager.PlayStartFanfare();
             }
         }
         else
@@ -158,23 +156,17 @@ public class GameManager : NetworkBehaviour
         if (sm.GetP1Score() > sm.GetP2Score())
         {
             joinText.SetText("Player 1 wins!");
-
-            m_UIAudio.clip = m_fanfares[1];
-            m_UIAudio.Play();
+            soundManager.PlayEndFanfare(true);
         }
         else if (sm.GetP1Score() < sm.GetP2Score())
         {
             joinText.SetText("Player 2 wins!");
-
-            m_UIAudio.clip = m_fanfares[2];
-            m_UIAudio.Play();
+            soundManager.PlayEndFanfare(true);
         }
         else
         {
             joinText.SetText("Its a draw!");
-
-            m_UIAudio.clip = m_fanfares[2];
-            m_UIAudio.Play();
+            soundManager.PlayEndFanfare(false);
         }
 
         if (gameTimer.Expired(Runner))
