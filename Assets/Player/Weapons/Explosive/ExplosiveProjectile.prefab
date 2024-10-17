@@ -354,3 +354,4 @@ MonoBehaviour:
   lifetime: 3
   despawnOnCollision: 1
   player: 0
+  explosionPrefab: {fileID: 7593022840479383294, guid: 94c5bd8308cf71c4687017a89a410217, type: 3}

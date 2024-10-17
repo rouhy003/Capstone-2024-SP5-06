@@ -16,7 +16,7 @@ public class PhysxBall : NetworkBehaviour
 
     public int player;
 
-    protected void Awake()
+    protected virtual void Awake()
     {
         _rigidbody = GetComponent<NetworkRigidbody3D>();
         audioSource = GetComponentInChildren<AudioSource>();
