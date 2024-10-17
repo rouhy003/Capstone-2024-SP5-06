@@ -10,6 +10,10 @@ public class SoundManager : NetworkBehaviour
     [SerializeField] private AudioClip[] m_fanfares;
     [SerializeField] private AudioClip[] m_scoreSounds;
 
+    // Used to limit the end fanfare method to only play once
+    // because the GameManager's GameEnding() method keeps looping.
+    private bool isGameOver;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +43,10 @@ public class SoundManager : NetworkBehaviour
     // Plays the end fanfare to the game. Selects different clips depending on if the player won or lost.
     public void PlayEndFanfare(bool playerWon)
     {
-        PlayPositiveOrNegativeSound(playerWon, m_fanfares[1], m_fanfares[2]);
+        if (!isGameOver)
+        {
+            PlayPositiveOrNegativeSound(playerWon, m_fanfares[1], m_fanfares[2]);
+            isGameOver = true;
+        }
     }
 }
