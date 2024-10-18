@@ -6,27 +6,32 @@ using Meta.XR.MRUtilityKit;
 
 public class MasterController : MonoBehaviour
 {
-    public PickUpWeapon puw;
-    public GenericWeapon weaponHeld;
-
-    public bool isWeaponHeld = false;
-    public bool leftHand = false;
-
-    public Transform handAnchor;
-    public GameObject ovrRig;
-    
-    public float CoolDownTime = 2;
-
     public bool isSpaceSyncing;
 
-    bool isJoined = false;
+    [SerializeField] protected bool leftHand = false;
+    [SerializeField] protected Transform handAnchor;
+    [SerializeField] protected GameObject ovrRig;
+    [SerializeField] protected List<GameObject> weaponPrefabs;
+
+    protected PickUpWeapon puw = null;
+    protected GenericWeapon weaponHeld;
+    protected StartMenu sm;
     
-    StartMenu sm;
-    GameObject mr;
+    protected List<GameObject> weapons = new List<GameObject>();
+    protected GameObject weaponPickUp = null;
+    protected GameObject mr;
+
+    protected bool isJoined = false;
 
     private void Start()
     {
         sm = FindObjectOfType<StartMenu>();
+
+        Vector3 spawnPoint = new Vector3(transform.position.x, transform.position.y + 1000, transform.position.z);
+        foreach (GameObject w in weaponPrefabs)
+        {
+            weapons.Add(Instantiate(w, spawnPoint, w.transform.rotation));
+        }
     }
 
     void Update()
@@ -57,7 +62,7 @@ public class MasterController : MonoBehaviour
         }
 
         //Handles controller input if a weapon is overlapped.
-        if ( puw != null)
+        if (puw != null)
         {
             HandleInput();
         }
@@ -66,11 +71,11 @@ public class MasterController : MonoBehaviour
     //Sets the necessary values in the PickUpWeapon script, so that the weapon follows the controller.
     private void PickUpWeapon()
     {
-        if (puw.canBePickedUp == true && isWeaponHeld == false)
+        if (weaponHeld == null && puw != null)
         {
+            Destroy(weaponPickUp);
             puw.controller = gameObject.transform;
             puw.PickUp();
-            isWeaponHeld = true;
             weaponHeld = puw.gameObject.GetComponent<GenericWeapon>();
         }
     }
@@ -78,10 +83,9 @@ public class MasterController : MonoBehaviour
     //Resets the values in the PickUpWeapon script, so it stops following controller.
     private void PutDownWeapon()
     {
-        if (puw.pickedUp == true && isWeaponHeld == true)
+        if (weaponHeld != null)
         {
             puw.PutDown();
-            isWeaponHeld = false;
             weaponHeld = null;
             puw = null;
         }
@@ -100,19 +104,34 @@ public class MasterController : MonoBehaviour
     //Sets the PickUpWeapon script if collider overlaps an object with one.
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.GetComponent<PickUpWeapon>() != null && isWeaponHeld == false && !collider.GetComponent<PickUpWeapon>().pickedUp)
+        if (collider.gameObject.CompareTag("Weapon"))
         {
-            puw = collider.GetComponent<PickUpWeapon>();
-            puw.canBePickedUp = true;
+            if (weaponHeld == null)
+            {
+                weaponPickUp = collider.gameObject;
+                switch (collider.GetComponent<WeaponType>().type)
+                {
+                    case 0:
+                        puw = weapons[0].GetComponent<PickUpWeapon>();
+                        break;
+                    case 1:
+                        puw = weapons[1].GetComponent<PickUpWeapon>();
+                        break;
+                    case 2:
+                        puw = weapons[2].GetComponent<PickUpWeapon>();
+                        break;
+                }
+            }
         }
     }
 
     //Sets the PickUpWeapon script to null if collider leaves an object.
     private void OnTriggerExit(Collider collider)
     {
-        if (puw != null)
+        if (weaponHeld == null)
         {
-            puw.canBePickedUp = false;
+            weaponPickUp = null;
+            puw = null;
         }
     }
 

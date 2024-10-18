@@ -6,7 +6,6 @@ public class PickUpWeapon : MonoBehaviour
 {
     GameObject startTransform;
     public Transform controller;
-    public bool canBePickedUp = false;
     public bool pickedUp = false;
 
     void Start()
@@ -14,6 +13,8 @@ public class PickUpWeapon : MonoBehaviour
         startTransform = new GameObject();
         startTransform.transform.position = transform.position;
         startTransform.transform.rotation = transform.rotation;
+        pickedUp = false;
+        controller = null;
     }
 
     //Sets the position and rotation of the weapon to either its starting transform or the transform of the controller that picked it up.
@@ -35,13 +36,11 @@ public class PickUpWeapon : MonoBehaviour
     public void PickUp()
     {
         pickedUp = true;
-        gameObject.GetComponent<BoxCollider>().isTrigger = true;
     }
 
     //Sets pickedUp to false and resets the boxCollider.
     public void PutDown()
     {
         pickedUp = false;
-        gameObject.GetComponent<BoxCollider>().isTrigger = false;
     }
 }
