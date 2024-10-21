@@ -52,33 +52,40 @@ public class SpawnManager : NetworkBehaviour
         SpawnableObject prop = prefab.GetComponent<SpawnableObject>();
         if (prop != null)
         {
-            Vector3 spawnBoundaries = prop.getSpawnBoundaries();
-            Debug.Log(spawnBoundaries + " " + gameObject.name);
+            float spawnChanceAttempt = Random.Range(0, 1);
 
-            // Grounded object spawning
-            if (prop.spawnsOnGround())
+            // Determines whether the object will spawn in this current attempt or not, based on the object's spawnChance attribute.
+            // Objects will always spawn if their spawnChance attribute is set to 1, for example.
+            if (spawnChanceAttempt <= prop.getSpawnChance())
             {
-                RaycastHit groundCast;
-                bool hasGround = Physics.Linecast(spawnPosition, spawnPosition + (10 * Vector3.down), out groundCast);
+                Vector3 spawnBoundaries = prop.getSpawnBoundaries();
+                Debug.Log(spawnBoundaries + " " + gameObject.name);
 
-                if (hasGround && groundCast.collider.tag == "Ground")
+                // Grounded object spawning
+                if (prop.spawnsOnGround())
                 {
-                    spawnPosition.Set(spawnPosition.x, groundCast.point.y + (spawnBoundaries.y / 2), spawnPosition.z);
+                    RaycastHit groundCast;
+                    bool hasGround = Physics.Linecast(spawnPosition, spawnPosition + (10 * Vector3.down), out groundCast);
 
-                    // Checks to make sure that there is enough space to spawn the object
-                    Collider[] overlap = Physics.OverlapBox(spawnPosition, new Vector3(spawnBoundaries.x, spawnBoundaries.y * 0.49f, spawnBoundaries.z));
+                    if (hasGround && groundCast.collider.tag == "Ground")
+                    {
+                        spawnPosition.Set(spawnPosition.x, groundCast.point.y + (spawnBoundaries.y / 2), spawnPosition.z);
+
+                        // Checks to make sure that there is enough space to spawn the object
+                        Collider[] overlap = Physics.OverlapBox(spawnPosition, new Vector3(spawnBoundaries.x, spawnBoundaries.y * 0.49f, spawnBoundaries.z));
+                        if (overlap.Length < 1)
+                        {
+                            canSpawn = true;
+                        }
+                    }
+                }
+                else
+                {
+                    Collider[] overlap = Physics.OverlapSphere(spawnPosition, 0.5f);
                     if (overlap.Length < 1)
                     {
                         canSpawn = true;
                     }
-                }
-            }
-            else
-            {
-                Collider[] overlap = Physics.OverlapSphere(spawnPosition, 0.5f);
-                if (overlap.Length < 1)
-                {
-                    canSpawn = true;
                 }
             }
         }

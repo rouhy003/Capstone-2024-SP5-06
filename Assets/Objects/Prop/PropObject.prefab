@@ -344,6 +344,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnsGrounded: 1
+  spawnChance: 1
   spawnBoundaries: {x: 0.08, y: 0.2, z: 0.08}
 --- !u!82 &3262189445670029858
 AudioSource:
