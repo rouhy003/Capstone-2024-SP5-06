@@ -54,6 +54,21 @@ public class GameManager : NetworkBehaviour
         {
             Phase = GamePhase.Starting;
         }
+        MasterController[] a = FindObjectsOfType<MasterController>();
+        if (playerCount == 1)
+        {
+            foreach (MasterController m in a)
+            {
+                m.SpawnWeapons(1);
+            }
+        }
+        else
+        {
+            foreach (MasterController m in a)
+            {
+                m.SpawnWeapons(2);
+            }
+        }
     }
 
     //Checks game phase on render

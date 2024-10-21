@@ -4,7 +4,7 @@ using UnityEngine;
 using Fusion;
 using Meta.XR.MRUtilityKit;
 
-public class MasterController : MonoBehaviour
+public class MasterController : NetworkBehaviour
 {
     public bool isSpaceSyncing;
 
@@ -26,11 +26,20 @@ public class MasterController : MonoBehaviour
     private void Start()
     {
         sm = FindObjectOfType<StartMenu>();
+    }
 
-        Vector3 spawnPoint = new Vector3(transform.position.x, transform.position.y + 1000, transform.position.z);
-        foreach (GameObject w in weaponPrefabs)
+    public void SpawnWeapons(int player)
+    {
+        if (weapons.Count == 0)
         {
-            weapons.Add(Instantiate(w, spawnPoint, w.transform.rotation));
+            Vector3 spawnPoint = new Vector3(transform.position.x, transform.position.y + 1000, transform.position.z);
+            int i = 0;
+            foreach (GameObject w in weaponPrefabs)
+            {
+                weapons.Add(Runner.Spawn(w, spawnPoint, w.transform.rotation).gameObject);
+                weapons[i].GetComponent<GenericWeapon>().playerHolding = player;
+                i++;
+            }
         }
     }
 

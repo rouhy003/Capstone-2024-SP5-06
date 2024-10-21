@@ -1809,7 +1809,7 @@ MonoBehaviour:
   <RoomRemovedEvent>k__BackingField:
     m_PersistentCalls:
       m_Calls: []
-  EnableWorldLock: 1
+  EnableWorldLock: 0
   SceneSettings:
     DataSource: 2
     RoomIndex: -1
@@ -4695,6 +4695,7 @@ GameObject:
   - component: {fileID: 2160059332355231884}
   - component: {fileID: 8478664957192686138}
   - component: {fileID: 920384355}
+  - component: {fileID: 8478664957192686139}
   m_Layer: 0
   m_Name: OVRControllerPrefabR
   m_TagString: Untagged
@@ -6640,6 +6641,7 @@ GameObject:
   - component: {fileID: 3654493940910474044}
   - component: {fileID: 119045227525257574}
   - component: {fileID: 1552894834}
+  - component: {fileID: 3654493940910474045}
   m_Layer: 0
   m_Name: OVRControllerPrefabL
   m_TagString: Untagged
@@ -6673,6 +6675,24 @@ MonoBehaviour:
   m_showState: 1
   showWhenHandsArePoweredByNaturalControllerPoses: 0
   RayHelper: {fileID: 0}
+--- !u!114 &3654493940910474045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3654493940904090854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortKey: 3737254146
+  ObjectInterest: 1
+  Flags: 1
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 119045227525257574}
 --- !u!4 &3665572945610302284
 Transform:
   m_ObjectHideFlags: 0
@@ -12006,6 +12026,24 @@ MonoBehaviour:
   - {fileID: 6977935320179673830, guid: 1e021d72513ddb04395fcf2aa020a332, type: 3}
   - {fileID: 4345866592698979647, guid: 444c0b2a615a00d448b001d77901d4aa, type: 3}
   - {fileID: 679194117442714353, guid: 49e2dbd2b2e188f4eae2fdbb7a3c61aa, type: 3}
+--- !u!114 &8478664957192686139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2160059332348317526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortKey: 3581257948
+  ObjectInterest: 1
+  Flags: 262145
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 8478664957192686138}
 --- !u!4 &8496753447292915229
 Transform:
   m_ObjectHideFlags: 0
