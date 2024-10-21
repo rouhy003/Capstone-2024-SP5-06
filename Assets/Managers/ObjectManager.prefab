@@ -49,6 +49,7 @@ MonoBehaviour:
   spawnPrefabs:
   - {fileID: 6420634983098379249, guid: 15f83b02f261f034385b64d4ff296abe, type: 3}
   - {fileID: 6821589715336073266, guid: 81372e63b076d1d49beef657e112283d, type: 3}
+  - {fileID: 3615842191857468730, guid: 3f58c84004ba5e04eb4f39c7d3382526, type: 3}
   ObjectLimit: 20
 --- !u!114 &5268249347754237953
 MonoBehaviour:
