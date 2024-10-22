@@ -107,6 +107,7 @@ public class SpawnManager : NetworkBehaviour
         if (canSpawn)
         {
             NetworkObject spawnedObject = Runner.Spawn(prefab, spawnPosition, getRandomRotation());
+            spawnedObject.GetComponent<SpawnableObject>().SetSpawnManager(this);
             currentObjects.Add(spawnedObject);
             return true;
         }
