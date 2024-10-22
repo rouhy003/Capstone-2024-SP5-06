@@ -27,7 +27,7 @@ public class SpawnManager : NetworkBehaviour
     public override void FixedUpdateNetwork()
     {
         // Attempts to spawn an object if the limit has yet to be reached.
-        if (currentObjects.Count < ObjectLimit)
+        if (currentObjects.Count < ObjectLimit && gameManager.Phase == GameManager.GamePhase.Running)
         {
             Vector3 spawnPosition = getRandomSpawnPosition();
 

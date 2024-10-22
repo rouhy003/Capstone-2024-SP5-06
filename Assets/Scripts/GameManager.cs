@@ -7,23 +7,20 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : NetworkBehaviour
 {
-    enum GamePhase
+    public enum GamePhase
     {
+        PreGame,
         Starting,
         Running,
         Ending
     }
 
     private static GameManager _singleton;
-    [Networked] private GamePhase Phase { get; set; }
+    [Networked] public GamePhase Phase { get; set; }
     [Networked] TickTimer gameTimer { get; set; }
     [Networked] int playerCount { get; set; }
     [SerializeField] private List<NetworkBehaviourId> _playerDataNetworkedIds = new List<NetworkBehaviourId>();
-
-    public GameObject gameUI;
-    public GameObject joinMenu;
-    public TextMeshProUGUI timeUI;
-    public TextMeshProUGUI joinText;
+    UIManager[] uiList;
 
     public int gameTime = 100;
     public int preGameTime = 10;
@@ -50,10 +47,7 @@ public class GameManager : NetworkBehaviour
     {
         playerCount++;
         sm = FindObjectOfType<ScoreManager>();
-        if (Object.HasStateAuthority)
-        {
-            Phase = GamePhase.Starting;
-        }
+        uiList = FindObjectsOfType<UIManager>();
         MasterController[] a = FindObjectsOfType<MasterController>();
         if (playerCount == 1)
         {
@@ -61,12 +55,21 @@ public class GameManager : NetworkBehaviour
             {
                 m.SpawnWeapons(1);
             }
+            Phase = GamePhase.Starting;
+            foreach (UIManager u in uiList)
+            {
+                u.UpdateText("Waiting for player to join");
+            }
         }
         else
         {
             foreach (MasterController m in a)
             {
                 m.SpawnWeapons(2);
+            }
+            if (Object.HasStateAuthority)
+            {
+                Phase = GamePhase.Starting;
             }
         }
     }
@@ -76,6 +79,8 @@ public class GameManager : NetworkBehaviour
     {
         switch (Phase)
         {
+            case GamePhase.PreGame:
+                break;
             case GamePhase.Starting:
                 GameStarting();
                 break;
@@ -117,27 +122,26 @@ public class GameManager : NetworkBehaviour
     //Checks for player count and starts a pre-game countdown if the minimum player amount is reached.
     public void GameStarting()
     {
-        if (playerCount == 1)
+        if (!gameTimer.IsRunning)
         {
-            if (!gameTimer.IsRunning)
-            {
-                gameTimer = TickTimer.CreateFromSeconds(Runner, preGameTime);
-            }
-            
-            int time = (int)gameTimer.RemainingTime(Runner);
-            joinText.SetText("Game starting in: " + time.ToString());
-
-            if (gameTimer.Expired(Runner))
-            {
-                gameTimer = TickTimer.CreateFromSeconds(Runner, gameTime);
-                joinMenu.SetActive(false);
-                gameUI.SetActive(true);
-                Phase = GamePhase.Running;
-            }
+            gameTimer = TickTimer.CreateFromSeconds(Runner, preGameTime);
         }
-        else
+            
+        int time = (int)gameTimer.RemainingTime(Runner);
+        foreach (UIManager u in uiList)
         {
-            joinText.SetText("Waiting for other player to join");
+            u.UpdateText("Game starting in: " + time.ToString());
+        }
+
+        if (gameTimer.Expired(Runner))
+        {
+            foreach (UIManager u in uiList)
+            {
+                u.SetGameUI(true);
+                u.SetGameMenu(false);
+            }
+            gameTimer = TickTimer.CreateFromSeconds(Runner, gameTime);
+            Phase = GamePhase.Running;
         }
     }
     
@@ -145,7 +149,10 @@ public class GameManager : NetworkBehaviour
     public void GameRunning()
     {
         int time = (int)gameTimer.RemainingTime(Runner);
-        timeUI.SetText(time.ToString());
+        foreach (UIManager u in uiList)
+        {
+            u.UpdateTime(time.ToString());
+        }
 
         if (gameTimer.Expired(Runner))
         {
@@ -157,19 +164,27 @@ public class GameManager : NetworkBehaviour
     //Shows which player won the game and shuts down the networkRunner at the end of a timer.
     public void GameEnding()
     {
-        joinMenu.SetActive(true);
-        gameUI.SetActive(false);
+        foreach (UIManager u in uiList)
+        {
+            u.SetGameMenu(true);
+        }
+        string text = "";
         if (sm.GetP1Score() > sm.GetP2Score())
         {
-            joinText.SetText("Player 1 wins!");
+            text = "Player 1 wins!";
         }
         else if (sm.GetP1Score() < sm.GetP2Score())
         {
-            joinText.SetText("Player 2 wins!");
+            text = "Player 2 wins!";
         }
         else
         {
-            joinText.SetText("Its a draw!");
+            text = "Its a draw!";
+        }
+
+        foreach (UIManager u in uiList)
+        {
+            u.UpdateText(text);
         }
 
         if (gameTimer.Expired(Runner))
