@@ -89,7 +89,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 0.04, y: 0.12, z: 0.16}
   m_Center: {x: 0, y: 0, z: 0}
@@ -106,7 +106,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 0}
-  canBePickedUp: 1
   pickedUp: 0
 --- !u!114 &6856641278013580128
 MonoBehaviour:
