@@ -55,7 +55,7 @@ public class GameManager : NetworkBehaviour
             {
                 m.SpawnWeapons(1);
             }
-            Phase = GamePhase.Starting;
+            ChangeGameStateRPC(GamePhase.PreGame);
             foreach (UIManager u in uiList)
             {
                 u.UpdateText("Waiting for player to join");
@@ -67,10 +67,7 @@ public class GameManager : NetworkBehaviour
             {
                 m.SpawnWeapons(2);
             }
-            if (Object.HasStateAuthority)
-            {
-                Phase = GamePhase.Starting;
-            }
+            ChangeGameStateRPC(GamePhase.Starting);
         }
     }
 
@@ -141,7 +138,7 @@ public class GameManager : NetworkBehaviour
                 u.SetGameMenu(false);
             }
             gameTimer = TickTimer.CreateFromSeconds(Runner, gameTime);
-            Phase = GamePhase.Running;
+            ChangeGameStateRPC(GamePhase.Running);
         }
     }
     
@@ -156,7 +153,7 @@ public class GameManager : NetworkBehaviour
 
         if (gameTimer.Expired(Runner))
         {
-            Phase = GamePhase.Ending;
+            ChangeGameStateRPC(GamePhase.Ending);
             gameTimer = TickTimer.CreateFromSeconds(Runner, postGameTime);
         }
     }
@@ -192,5 +189,11 @@ public class GameManager : NetworkBehaviour
             Runner.Shutdown();
             SceneManager.LoadScene(0);
         }
+    }
+
+    [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
+    public void ChangeGameStateRPC(GamePhase phase)
+    {
+        Phase = phase;
     }
 }

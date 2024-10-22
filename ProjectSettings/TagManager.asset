@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - Weapon
+  - SpaceSync
   layers:
   - Default
   - TransparentFX

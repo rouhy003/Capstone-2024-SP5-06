@@ -65,6 +65,7 @@ public class MasterController : NetworkBehaviour
         {
             if (OVRInput.Get(OVRInput.Button.Three) || OVRInput.Get(OVRInput.Button.One))
             {
+                GameObject.FindWithTag("SpaceSync").SetActive(false);
                 isJoined = true;
                 sm.StartSharedVR();
             }
