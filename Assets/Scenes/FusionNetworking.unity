@@ -2537,6 +2537,8 @@ MonoBehaviour:
   - {fileID: 6977935320179673830, guid: 1e021d72513ddb04395fcf2aa020a332, type: 3}
   - {fileID: 4345866592698979647, guid: 444c0b2a615a00d448b001d77901d4aa, type: 3}
   - {fileID: 679194117442714353, guid: 49e2dbd2b2e188f4eae2fdbb7a3c61aa, type: 3}
+  otherController: {fileID: 8478664957192686138}
+  isJoined: 0
 --- !u!4 &134554180667482487
 Transform:
   m_ObjectHideFlags: 0
@@ -6595,7 +6597,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SortKey: 3737254146
   ObjectInterest: 1
-  Flags: 1
+  Flags: 262145
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 119045227525257574}
@@ -7825,6 +7827,10 @@ PrefabInstance:
       propertyPath: timeUI
       value: 
       objectReference: {fileID: 358466222}
+    - target: {fileID: 4110461799773829270, guid: 6c0b9a8e47e8a904c883e8d7413fb4db, type: 3}
+      propertyPath: gameTime
+      value: 180
+      objectReference: {fileID: 0}
     - target: {fileID: 4110461799773829270, guid: 6c0b9a8e47e8a904c883e8d7413fb4db, type: 3}
       propertyPath: joinMenu
       value: 
@@ -11932,6 +11938,8 @@ MonoBehaviour:
   - {fileID: 6977935320179673830, guid: 1e021d72513ddb04395fcf2aa020a332, type: 3}
   - {fileID: 4345866592698979647, guid: 444c0b2a615a00d448b001d77901d4aa, type: 3}
   - {fileID: 679194117442714353, guid: 49e2dbd2b2e188f4eae2fdbb7a3c61aa, type: 3}
+  otherController: {fileID: 119045227525257574}
+  isJoined: 0
 --- !u!114 &8478664957192686139
 MonoBehaviour:
   m_ObjectHideFlags: 0

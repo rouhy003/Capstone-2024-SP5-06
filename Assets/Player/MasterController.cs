@@ -12,6 +12,7 @@ public class MasterController : NetworkBehaviour
     [SerializeField] protected Transform handAnchor;
     [SerializeField] protected GameObject ovrRig;
     [SerializeField] protected List<GameObject> weaponPrefabs;
+    [SerializeField] protected MasterController otherController;
 
     protected PickUpWeapon puw = null;
     protected GenericWeapon weaponHeld;
@@ -21,7 +22,7 @@ public class MasterController : NetworkBehaviour
     protected GameObject weaponPickUp = null;
     protected GameObject mr;
 
-    protected bool isJoined = false;
+    public bool isJoined = false;
 
     private void Start()
     {
@@ -30,10 +31,13 @@ public class MasterController : NetworkBehaviour
 
     public void SpawnWeapons(int player)
     {
+        //Checks if weapons have already been spawned
         if (weapons.Count == 0)
         {
             Vector3 spawnPoint = new Vector3(transform.position.x, transform.position.y + 1000, transform.position.z);
             int i = 0;
+
+            //Spawns networked weapons for each masterController
             foreach (GameObject w in weaponPrefabs)
             {
                 weapons.Add(Runner.Spawn(w, spawnPoint, w.transform.rotation).gameObject);
@@ -67,6 +71,7 @@ public class MasterController : NetworkBehaviour
             {
                 GameObject.FindWithTag("SpaceSync").SetActive(false);
                 isJoined = true;
+                otherController.isJoined = true;
                 sm.StartSharedVR();
             }
         }
@@ -187,7 +192,7 @@ public class MasterController : NetworkBehaviour
             {
                 PickUpWeapon();
             }
-            else if (OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger) > 0 && leftHand)
+            else if (OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger) > 0)
             {
                 FireWeapon();
             }
@@ -203,7 +208,7 @@ public class MasterController : NetworkBehaviour
             {
                 PickUpWeapon();
             }
-            else if (OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger) > 0 && !leftHand)
+            else if (OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger) > 0)
             {
                 FireWeapon();
             }
