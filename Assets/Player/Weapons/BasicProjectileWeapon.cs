@@ -7,6 +7,7 @@ public class BasicProjectileWeapon : GenericWeapon
 {
     [SerializeField] private GameObject projectile;
     [SerializeField] private AudioSource fireSound;
+    [SerializeField] private ParticleSystem muzzleFlash;
 
     // Start is called before the first frame update
     new void Start()
@@ -26,6 +27,7 @@ public class BasicProjectileWeapon : GenericWeapon
             p.player = playerHolding;
             p.Fire(FirePoint.position, GetFiringRayOrigin() * shootSpeed);
             fireSound.Play();
+            muzzleFlash.Play();
         }
     }
 }
