@@ -7,7 +7,10 @@ public class PhysxBall : NetworkBehaviour
     private NetworkRigidbody3D _rigidbody;
 
     protected AudioSource audioSource;
+
+    // Audio and visual effects
     [SerializeField] protected AudioClip m_bounceSound;
+    [SerializeField] protected GameObject bounceParticle;
 
     [Networked] TickTimer life { get; set; }
     [SerializeField] private int lifetime = 3;
@@ -24,12 +27,11 @@ public class PhysxBall : NetworkBehaviour
 
     public override void FixedUpdateNetwork()
     {
-        if (life.Expired(Runner))
-        {
-            Despawn();
-        }
+        // Despawns the projectile once its lifetime runs out.
+        if (life.Expired(Runner)) Despawn();
     }
 
+    // Fires the projectile
     public void Fire(Vector3 firePoint, Vector3 forward)
     {
         //_rigidbody.Teleport(firePoint, Quaternion.identity);
@@ -40,6 +42,7 @@ public class PhysxBall : NetworkBehaviour
         life = TickTimer.CreateFromSeconds(Runner, lifetime);
     }
 
+    // Despawns the projectile
     public virtual void Despawn()
     {
         Runner.Despawn(Object);
@@ -47,27 +50,23 @@ public class PhysxBall : NetworkBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        // If the projectile collides with a prop, it gets knocked down.
         PropObject prop = collision.gameObject.GetComponent<PropObject>();
         if (prop != null)
         {
             prop.Knockdown(player);
         }
 
-        PlayCollisionSound();
-
-        if (despawnOnCollision)
-        {
-            Despawn();
-        }
-    }
-
-    // Plays the sound effect upon colliding with a surface, if that sound effect exists.
-    private void PlayCollisionSound()
-    {
-        if (!despawnOnCollision && m_bounceSound != null)
+        // Plays the sound effect, if it exists.
+        if (m_bounceSound != null)
         {
             audioSource.clip = m_bounceSound;
             audioSource.Play();
         }
+
+        // Plays the particle effect, if it exists.
+        if (bounceParticle != null) Runner.Spawn(bounceParticle, collision.collider.transform.position);
+
+        if (despawnOnCollision) Despawn();
     }
 }
