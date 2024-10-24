@@ -65,7 +65,7 @@ public class PhysxBall : NetworkBehaviour
         }
 
         // Plays the particle effect, if it exists.
-        if (bounceParticle != null) Runner.Spawn(bounceParticle, collision.collider.transform.position);
+        if (bounceParticle != null) Runner.Spawn(bounceParticle, collision.GetContact(0).point);
 
         if (despawnOnCollision) Despawn();
     }
