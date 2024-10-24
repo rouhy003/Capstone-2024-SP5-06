@@ -9,7 +9,6 @@ public class PhysxBall : NetworkBehaviour
     protected AudioSource audioSource;
 
     // Audio and visual effects
-    [SerializeField] protected AudioClip m_bounceSound;
     [SerializeField] protected GameObject bounceParticle;
 
     [Networked] TickTimer life { get; set; }
@@ -55,13 +54,6 @@ public class PhysxBall : NetworkBehaviour
         if (prop != null)
         {
             prop.Knockdown(player);
-        }
-
-        // Plays the sound effect, if it exists.
-        if (m_bounceSound != null)
-        {
-            audioSource.clip = m_bounceSound;
-            audioSource.Play();
         }
 
         // Plays the particle effect, if it exists.
