@@ -161,7 +161,6 @@ GameObject:
   - component: {fileID: 6006216268840979455}
   - component: {fileID: 8011203199701738278}
   - component: {fileID: 7783627437067562534}
-  - component: {fileID: 3796674339727988829}
   - component: {fileID: 7848342039684783517}
   m_Layer: 0
   m_Name: BasicWeapon
@@ -262,7 +261,6 @@ MonoBehaviour:
   NetworkedBehaviours:
   - {fileID: 6237131453747790460}
   - {fileID: 7783627437067562534}
-  - {fileID: 3796674339727988829}
 --- !u!54 &8011203199701738278
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -312,21 +310,6 @@ MonoBehaviour:
     Position: 0.01
     Rotation: 0.01
     Scale: 0.01
---- !u!114 &3796674339727988829
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6977935320179673830}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c80ed3224fd4d00419575a3600a31ad1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnsGrounded: 1
-  spawnChance: 1
-  spawnBoundaries: {x: 0.5, y: 0.5, z: 0.5}
 --- !u!82 &7848342039684783517
 AudioSource:
   m_ObjectHideFlags: 0
