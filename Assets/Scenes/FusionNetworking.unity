@@ -7846,7 +7846,7 @@ PrefabInstance:
       objectReference: {fileID: 358466222}
     - target: {fileID: 4110461799773829270, guid: 6c0b9a8e47e8a904c883e8d7413fb4db, type: 3}
       propertyPath: gameTime
-      value: 2
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 4110461799773829270, guid: 6c0b9a8e47e8a904c883e8d7413fb4db, type: 3}
       propertyPath: joinMenu
@@ -7858,11 +7858,11 @@ PrefabInstance:
       objectReference: {fileID: 93357637}
     - target: {fileID: 4110461799773829270, guid: 6c0b9a8e47e8a904c883e8d7413fb4db, type: 3}
       propertyPath: preGameTime
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4110461799773829270, guid: 6c0b9a8e47e8a904c883e8d7413fb4db, type: 3}
       propertyPath: postGameTime
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8147501138924039138, guid: 6c0b9a8e47e8a904c883e8d7413fb4db, type: 3}
       propertyPath: SortKey
