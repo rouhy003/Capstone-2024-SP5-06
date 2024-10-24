@@ -17,6 +17,7 @@ public class MasterController : NetworkBehaviour
     protected PickUpWeapon puw = null;
     protected GenericWeapon weaponHeld;
     protected StartMenu sm;
+    protected SpaceSyncSaving save;
     
     protected List<GameObject> weapons = new List<GameObject>();
     protected GameObject weaponPickUp = null;
@@ -27,6 +28,7 @@ public class MasterController : NetworkBehaviour
     private void Start()
     {
         sm = FindObjectOfType<StartMenu>();
+        save = FindObjectOfType<SpaceSyncSaving>();
     }
 
     public void SpawnWeapons(int player)
@@ -64,23 +66,8 @@ public class MasterController : NetworkBehaviour
         gameObject.transform.position = handAnchor.transform.position;
         gameObject.transform.rotation = handAnchor.transform.rotation;
 
-        //Handles input for joining a game.
-        if (!isJoined && !isSpaceSyncing)
-        {
-            if (OVRInput.Get(OVRInput.Button.Three) || OVRInput.Get(OVRInput.Button.One))
-            {
-                GameObject.FindWithTag("SpaceSync").SetActive(false);
-                isJoined = true;
-                otherController.isJoined = true;
-                sm.StartSharedVR();
-            }
-        }
-
         //Handles controller input if a weapon is overlapped.
-        if (puw != null)
-        {
-            HandleInput();
-        }
+        HandleInput();
     }
 
     //Sets the necessary values in the PickUpWeapon script, so that the weapon follows the controller.
@@ -156,26 +143,32 @@ public class MasterController : NetworkBehaviour
         if (isSpaceSyncing)
         {
             //Right thumbstick changes the X and Z position of the VR rig
-            ovrRig.transform.position -= new Vector3(OVRInput.Get(OVRInput.RawAxis2D.RThumbstick).x / 100, ovrRig.transform.position.y, OVRInput.Get(OVRInput.RawAxis2D.RThumbstick).y / 100);
+            ovrRig.transform.position -= new Vector3(OVRInput.Get(OVRInput.RawAxis2D.RThumbstick).x / 200, ovrRig.transform.position.y, OVRInput.Get(OVRInput.RawAxis2D.RThumbstick).y / 100);
 
             //Left thumbstick changes the Y rotation of the VR rig
             Quaternion r = ovrRig.transform.rotation;
-            ovrRig.transform.rotation = new Quaternion(r.x, r.y + OVRInput.Get(OVRInput.RawAxis2D.LThumbstick).y / 50, r.z, r.w);
+            ovrRig.transform.rotation = new Quaternion(r.x, r.y + OVRInput.Get(OVRInput.RawAxis2D.LThumbstick).y / 75, r.z, r.w);
 
             if (mr != null)
             {
                 //Right thumbstick changes the X and Z position of the room scan as well
-                mr.transform.position -= new Vector3(OVRInput.Get(OVRInput.RawAxis2D.RThumbstick).x / 100, mr.transform.position.y, OVRInput.Get(OVRInput.RawAxis2D.RThumbstick).y / 100);
+                mr.transform.position -= new Vector3(OVRInput.Get(OVRInput.RawAxis2D.RThumbstick).x / 200, mr.transform.position.y, OVRInput.Get(OVRInput.RawAxis2D.RThumbstick).y / 100);
 
                 //Left thumbstick changes the Y rotation of the room scan as well
                 Quaternion rm = mr.transform.rotation;
-                mr.transform.rotation = new Quaternion(rm.x, rm.y + OVRInput.Get(OVRInput.RawAxis2D.LThumbstick).y / 50, rm.z, rm.w);
+                mr.transform.rotation = new Quaternion(rm.x, rm.y + OVRInput.Get(OVRInput.RawAxis2D.LThumbstick).y / 75, rm.z, rm.w);
             }
+        }
+    }
 
-            if (OVRInput.Get(OVRInput.Button.Three) || OVRInput.Get(OVRInput.Button.One))
-            {
-                isSpaceSyncing = false;
-            }
+    private void JoinGame()
+    {
+        if (!isJoined && !isSpaceSyncing)
+        {
+            GameObject.FindWithTag("SpaceSync").SetActive(false);
+            isJoined = true;
+            otherController.isJoined = true;
+            sm.StartSharedVR();
         }
     }
 
@@ -190,6 +183,12 @@ public class MasterController : NetworkBehaviour
             }
             else if (OVRInput.Get(OVRInput.Button.Three))
             {
+                if (isSpaceSyncing)
+                {
+                    isSpaceSyncing = false;
+                    save.SaveData();
+                }
+                JoinGame();
                 PickUpWeapon();
             }
             else if (OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger) > 0)
@@ -206,6 +205,12 @@ public class MasterController : NetworkBehaviour
             }
             else if (OVRInput.Get(OVRInput.Button.One))
             {
+                if (isSpaceSyncing)
+                {
+                    isSpaceSyncing = false;
+                    save.SaveData();
+                }
+                JoinGame();
                 PickUpWeapon();
             }
             else if (OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger) > 0)
