@@ -111,7 +111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnsGrounded: 0
   spawnChance: 1
-  spawnBoundaries: {x: 0.5, y: 0.5, z: 0.5}
+  spawnBoundaries: {x: 0.25, y: 0.25, z: 0.25}
 --- !u!114 &1010140712284231411
 MonoBehaviour:
   m_ObjectHideFlags: 0

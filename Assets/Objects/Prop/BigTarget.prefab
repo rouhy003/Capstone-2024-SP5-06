@@ -14,15 +14,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1170546683038371727, guid: 81372e63b076d1d49beef657e112283d, type: 3}
       propertyPath: spawnBoundaries.x
-      value: 2
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 1170546683038371727, guid: 81372e63b076d1d49beef657e112283d, type: 3}
       propertyPath: spawnBoundaries.y
-      value: 2
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 1170546683038371727, guid: 81372e63b076d1d49beef657e112283d, type: 3}
       propertyPath: spawnBoundaries.z
-      value: 2
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 1282768180534690672, guid: 81372e63b076d1d49beef657e112283d, type: 3}
       propertyPath: m_Height
