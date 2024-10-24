@@ -32,7 +32,7 @@ public class SpawnManager : NetworkBehaviour
             Vector3 spawnPosition = getRandomSpawnPosition();
 
             bool objectSpawned = false;
-            int spawnAttemptsRemaining = 50;
+            int spawnAttemptsRemaining = 20;
 
             // Repeats the spawn attempt until either the object spawns successfully or there are no more remaining attempts.
             while (!objectSpawned && spawnAttemptsRemaining > 0)
@@ -52,11 +52,9 @@ public class SpawnManager : NetworkBehaviour
         SpawnableObject prop = prefab.GetComponent<SpawnableObject>();
         if (prop != null)
         {
-            float spawnChanceAttempt = Random.Range(0, 1);
-
             // Determines whether the object will spawn in this current attempt or not, based on the object's spawnChance attribute.
             // Objects will always spawn if their spawnChance attribute is set to 1, for example.
-            if (spawnChanceAttempt <= prop.getSpawnChance())
+            if (Random.Range(0f, 1f) <= prop.getSpawnChance())
             {
                 Vector3 spawnBoundaries = prop.getSpawnBoundaries();
                 Debug.Log(spawnBoundaries + " " + gameObject.name);
@@ -81,7 +79,9 @@ public class SpawnManager : NetworkBehaviour
                 }
                 else
                 {
-                    Collider[] overlap = Physics.OverlapSphere(spawnPosition, 0.5f);
+                    // Checks to make sure that there is enough space to spawn the object
+                    // Uses the "X" value of the "spawnBoundaries" attribute.
+                    Collider[] overlap = Physics.OverlapSphere(spawnPosition, spawnBoundaries.x);
                     if (overlap.Length < 1)
                     {
                         canSpawn = true;
