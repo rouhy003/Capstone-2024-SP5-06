@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Fusion;
 using UnityEngine;
+using Meta.XR.MRUtilityKit;
 
 public class SpawnManager : NetworkBehaviour
 {
@@ -117,7 +118,11 @@ public class SpawnManager : NetworkBehaviour
     // Returns a random spawn position.
     protected Vector3 getRandomSpawnPosition()
     {
-        return new Vector3(
+        MRUKRoom room = MRUK.Instance.GetCurrentRoom();
+        var randomPosition = room.GenerateRandomPositionInRoom(0.5f, true);
+
+        if (randomPosition.HasValue) return randomPosition.Value;
+        else return new Vector3(
             Random.Range(20f, -20f),
             Random.Range(1f, 5f),
             Random.Range(20f, -20f));
