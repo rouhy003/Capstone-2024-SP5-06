@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7511734687960870502}
   - component: {fileID: 3793937624335364482}
   - component: {fileID: 2199976059105214265}
+  - component: {fileID: 3241416241452988009}
   m_Layer: 0
   m_Name: ExplosiveWeaponPickup
   m_TagString: Weapon
@@ -78,6 +79,7 @@ MonoBehaviour:
   NetworkedBehaviours:
   - {fileID: 7511734687960870502}
   - {fileID: 3793937624335364482}
+  - {fileID: 3241416241452988009}
 --- !u!54 &445012872565025455
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -155,6 +157,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+--- !u!114 &3241416241452988009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3432023060762813093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77c2455a01f0db44d8707874932e1f98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectLifetime: 3
 --- !u!1 &6899916114835350781
 GameObject:
   m_ObjectHideFlags: 0
