@@ -255,6 +255,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnsGrounded: 1
+  spawnChance: 1
   spawnBoundaries: {x: 0.5, y: 0.5, z: 0.5}
 --- !u!114 &8053573288844250468
 MonoBehaviour:
