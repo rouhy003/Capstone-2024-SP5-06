@@ -250,6 +250,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df946d001a17ec44f85dbe7dff68cb2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_bounceSound: {fileID: 0}
+  bounceParticle: {fileID: 8011496713168525776, guid: 4d33edef659cab249b48cc3c1b5ed464, type: 3}
   lifetime: 3
   despawnOnCollision: 1
   player: 0
