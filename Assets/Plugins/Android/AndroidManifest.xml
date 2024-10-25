@@ -12,13 +12,12 @@
     <meta-data android:name="unityplayer.SkipPermissionsDialog" android:value="false" />
     <meta-data android:name="com.samsung.android.vr.application.mode" android:value="vr_only" />
     <meta-data android:name="com.oculus.ossplash.background" android:value="passthrough-contextual" />
-    <meta-data android:name="com.oculus.telemetry.project_guid" android:value="3e98eebd-6259-4df9-8e0e-0154f9e8e6c2" />
-    <meta-data android:name="com.oculus.supportedDevices" android:value="eureka" />
+    <meta-data android:name="com.oculus.telemetry.project_guid" android:value="c8bc5957-1696-4683-9811-6034f15a0dd7" />
+    <meta-data android:name="com.oculus.supportedDevices" android:value="quest|quest2|questpro|eureka" />
   </application>
   <uses-feature android:name="android.hardware.vr.headtracking" android:version="1" android:required="true" />
-  <uses-feature android:name="com.oculus.experimental.enabled" android:required="true" />
   <uses-permission android:name="com.oculus.permission.USE_ANCHOR_API" />
   <uses-permission android:name="com.oculus.permission.IMPORT_EXPORT_IOT_MAP_DATA" />
-  <uses-feature android:name="com.oculus.feature.PASSTHROUGH" android:required="true" />
+  <uses-feature android:name="com.oculus.feature.PASSTHROUGH" android:required="false" />
   <uses-permission android:name="com.oculus.permission.USE_SCENE" />
 </manifest>
