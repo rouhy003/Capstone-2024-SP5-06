@@ -25,7 +25,7 @@ public class AutoDespawn : NetworkBehaviour
         {
             // Despawns the object
             // If the object is a spawnable one, it calls the script's own despawn method.
-            if (spawnedObject != null) spawnedObject.Despawn();
+            if (spawnedObject != null) spawnedObject.DespawnRPC();
             else Runner.Despawn(Object);
         }
     }

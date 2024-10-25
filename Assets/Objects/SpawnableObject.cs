@@ -24,5 +24,6 @@ public class SpawnableObject : NetworkBehaviour
     public float getSpawnChance() { return spawnChance; }
 
     // Calls the referenced spawn manager to despawn this current object.
-    public void Despawn() { spawnManager.DespawnObject(Object); }
+    [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
+    public void DespawnRPC() { spawnManager.DespawnObject(Object); }
 }

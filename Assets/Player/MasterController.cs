@@ -75,7 +75,7 @@ public class MasterController : NetworkBehaviour
     {
         if (weaponHeld == null && puw != null)
         {
-            weaponPickUp.GetComponent<SpawnableObject>().Despawn();
+            weaponPickUp.GetComponent<SpawnableObject>().DespawnRPC();
             puw.controller = gameObject.transform;
             puw.PickUp();
             weaponHeld = puw.gameObject.GetComponent<GenericWeapon>();
