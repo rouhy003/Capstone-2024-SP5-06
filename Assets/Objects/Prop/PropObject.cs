@@ -69,7 +69,7 @@ public class PropObject : NetworkBehaviour
     private void Despawn()
     {
         // Spawns a particle on despawn, if it has one
-        if (particleSpawner != null) particleSpawner.SpawnParticle(transform.position);
+        if (particleSpawner != null && hasBeenStruck) particleSpawner.SpawnParticle(transform.position);
 
         FindObjectOfType<ObjectManager>().DespawnObject(Object);
     }
