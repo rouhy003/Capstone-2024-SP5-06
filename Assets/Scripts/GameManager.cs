@@ -145,6 +145,7 @@ public class GameManager : NetworkBehaviour
             }
             gameTimer = TickTimer.CreateFromSeconds(Runner, gameTime);
             ChangeGameStateRPC(GamePhase.Running);
+            soundManager.PlayStartFanfare();
         }
     }
     
@@ -175,14 +176,17 @@ public class GameManager : NetworkBehaviour
         if (sm.GetP1Score() > sm.GetP2Score())
         {
             text = "Player 1 wins!";
+            soundManager.PlayEndFanfare(true);
         }
         else if (sm.GetP1Score() < sm.GetP2Score())
         {
             text = "Player 2 wins!";
+            soundManager.PlayEndFanfare(true);
         }
         else
         {
             text = "Its a draw!";
+            soundManager.PlayEndFanfare(false);
         }
 
         foreach (UIManager u in uiList)
