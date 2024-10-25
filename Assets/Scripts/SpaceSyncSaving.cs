@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Meta.XR.MRUtilityKit;
 
 public class SpaceSyncSaving : MonoBehaviour
 {
     [SerializeField] protected GameObject VR_rig;
+    [SerializeField] protected GameObject room_scan;
 
     void Start()
     {
+        room_scan = FindObjectOfType<MRUKRoom>().gameObject;
         LoadData();
     }
 
@@ -29,5 +32,8 @@ public class SpaceSyncSaving : MonoBehaviour
         
         VR_rig.transform.position = position;
         VR_rig.transform.rotation = rotation;
+
+        room_scan.transform.position = position;
+        room_scan.transform.rotation = rotation;
     }
 }
