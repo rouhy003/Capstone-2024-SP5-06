@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1794926697623570118}
   - component: {fileID: 1282768180534690672}
   - component: {fileID: 9085496565895151603}
+  - component: {fileID: -6148159125264324293}
   - component: {fileID: 3851843275772144786}
   - component: {fileID: 1170546683038371727}
   - component: {fileID: 1010140712284231411}
@@ -77,9 +78,26 @@ MonoBehaviour:
   Flags: 262145
   NestedObjects: []
   NetworkedBehaviours:
+  - {fileID: -6148159125264324293}
   - {fileID: 3851843275772144786}
   - {fileID: 1170546683038371727}
   - {fileID: 1010140712284231411}
+--- !u!114 &-6148159125264324293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6821589715336073266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncScale: 0
+  SyncParent: 0
+  _autoAOIOverride: 1
+  DisableSharedModeInterpolation: 0
 --- !u!114 &3851843275772144786
 MonoBehaviour:
   m_ObjectHideFlags: 0
