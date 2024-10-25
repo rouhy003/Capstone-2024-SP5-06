@@ -61,7 +61,7 @@ public class GameManager : NetworkBehaviour
             {
                 m.SpawnWeapons(1);
             }
-            ChangeGameStateRPC(GamePhase.Starting);
+            ChangeGameStateRPC(GamePhase.PreGame);
             foreach (UIManager u in uiList)
             {
                 u.UpdateText("Waiting for player to join");
