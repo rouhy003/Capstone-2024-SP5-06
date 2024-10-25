@@ -43,7 +43,7 @@ public class ExplosiveProjectile : PhysxBall
             }
 
             // Spawns the explosion particle from the spawner.
-            particleSpawner.SpawnParticle(transform.position);
+            particleSpawner.SpawnParticleRPC(transform.position);
         }
     }
 

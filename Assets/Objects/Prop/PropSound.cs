@@ -11,7 +11,8 @@ public class PropSound : NetworkBehaviour
     {
         hitSound = GetComponent<AudioSource>();
     }
-    public void PlayHitSound()
+    [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
+    public void PlayHitSoundRPC()
     {
         hitSound.Play();
     }

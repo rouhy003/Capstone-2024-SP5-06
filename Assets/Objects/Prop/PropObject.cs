@@ -52,7 +52,7 @@ public class PropObject : NetworkBehaviour
             }
 
             // Plays a hit sound, if it has one.
-            if (propSound != null) propSound.PlayHitSound();
+            if (propSound != null) propSound.PlayHitSoundRPC();
 
             // Changes the prop's mesh, if it changes state.
             if (propState != null) propState.UseDamageMesh();
@@ -69,7 +69,7 @@ public class PropObject : NetworkBehaviour
     private void Despawn()
     {
         // Spawns a particle on despawn, if it has one
-        if (particleSpawner != null && hasBeenStruck) particleSpawner.SpawnParticle(transform.position);
+        if (particleSpawner != null && hasBeenStruck) particleSpawner.SpawnParticleRPC(transform.position);
 
         FindObjectOfType<ObjectManager>().DespawnObject(Object);
     }
