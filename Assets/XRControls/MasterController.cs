@@ -21,7 +21,7 @@ public class MasterController : NetworkBehaviour
     
     protected List<GameObject> weapons = new List<GameObject>();
     protected GameObject weaponPickUp = null;
-    protected GameObject mr;
+    public GameObject mr;
 
     public bool isJoined = false;
 
@@ -55,7 +55,7 @@ public class MasterController : NetworkBehaviour
         {
             try
             {
-                mr = FindObjectOfType<MRUKRoom>().gameObject;
+                mr = FindObjectOfType<MRUKAnchor>().gameObject.transform.parent.gameObject;
             }
             catch{}
         }
@@ -142,21 +142,22 @@ public class MasterController : NetworkBehaviour
     {
         if (isSpaceSyncing)
         {
-            //Right thumbstick changes the X and Z position of the VR rig
-            ovrRig.transform.position -= new Vector3(OVRInput.Get(OVRInput.RawAxis2D.RThumbstick).x / 200, ovrRig.transform.position.y, OVRInput.Get(OVRInput.RawAxis2D.RThumbstick).y / 100);
 
-            //Left thumbstick changes the Y rotation of the VR rig
-            Quaternion r = ovrRig.transform.rotation;
-            ovrRig.transform.rotation = new Quaternion(r.x, r.y + OVRInput.Get(OVRInput.RawAxis2D.LThumbstick).y / 75, r.z, r.w);
 
             if (mr != null)
             {
-                //Right thumbstick changes the X and Z position of the room scan as well
-                mr.transform.position -= new Vector3(OVRInput.Get(OVRInput.RawAxis2D.RThumbstick).x / 200, mr.transform.position.y, OVRInput.Get(OVRInput.RawAxis2D.RThumbstick).y / 100);
+                //Right thumbstick changes the X and Z position of the VR rig
+                ovrRig.transform.position -= new Vector3(OVRInput.Get(OVRInput.RawAxis2D.RThumbstick).x / 200, ovrRig.transform.position.y, OVRInput.Get(OVRInput.RawAxis2D.RThumbstick).y / 200);
 
+                //Left thumbstick changes the Y rotation of the VR rig
+                Quaternion r = ovrRig.transform.rotation;
+                ovrRig.transform.rotation = new Quaternion(r.x, r.y + OVRInput.Get(OVRInput.RawAxis2D.LThumbstick).y / 75, r.z, r.w);
+
+
+                //Right thumbstick changes the X and Z position of the room scan as well
                 //Left thumbstick changes the Y rotation of the room scan as well
-                Quaternion rm = mr.transform.rotation;
-                mr.transform.rotation = new Quaternion(rm.x, rm.y + OVRInput.Get(OVRInput.RawAxis2D.LThumbstick).y / 75, rm.z, rm.w);
+                mr.transform.SetPositionAndRotation(ovrRig.transform.position, ovrRig.transform.rotation);
+
             }
         }
     }

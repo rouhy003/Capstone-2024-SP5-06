@@ -17,7 +17,7 @@ PlayerSettings:
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
-  m_ShowUnitySplashScreen: 0
+  m_ShowUnitySplashScreen: 1
   m_ShowUnitySplashLogo: 1
   m_SplashScreenOverlayOpacity: 1
   m_SplashScreenAnimation: 1
@@ -139,8 +139,7 @@ PlayerSettings:
   preloadedAssets:
   - {fileID: 11400000, guid: a59f2851db486be4da251f91e1b1e290, type: 2}
   - {fileID: 11400000, guid: 5de758c598b0c6d49a50eff0cba40bf0, type: 2}
-  - {fileID: -4072480565831690816, guid: 715a7c74d7af6014a857aeca51e4b730, type: 2}
-  - {fileID: 11400000, guid: 16077adcdbb0930449b708a082aaac7b, type: 2}
+  - {fileID: 11400000, guid: add52df69de97db4094059317d7368ff, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -742,7 +741,7 @@ PlayerSettings:
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
   scriptingDefineSymbols:
-    Android: FUSION_WEAVER;FUSION2;PHOTON_FUSION_PHYSICS_ADDON_DEFINED
+    Android: OVRAVATAR_ASSERT_ENABLE_CONDITIONAL;FUSION_WEAVER;FUSION2;PHOTON_FUSION_PHYSICS_ADDON_DEFINED
     EmbeddedLinux: PHOTON_FUSION_PHYSICS_ADDON_DEFINED
     GameCoreScarlett: PHOTON_FUSION_PHYSICS_ADDON_DEFINED
     GameCoreXboxOne: PHOTON_FUSION_PHYSICS_ADDON_DEFINED
@@ -752,12 +751,12 @@ PlayerSettings:
     PS5: PHOTON_FUSION_PHYSICS_ADDON_DEFINED
     QNX: PHOTON_FUSION_PHYSICS_ADDON_DEFINED
     Stadia: PHOTON_FUSION_PHYSICS_ADDON_DEFINED
-    Standalone: FUSION_WEAVER;FUSION2;PHOTON_FUSION_PHYSICS_ADDON_DEFINED
+    Standalone: OVRAVATAR_ASSERT_ENABLE_CONDITIONAL;FUSION_WEAVER;FUSION2;PHOTON_FUSION_PHYSICS_ADDON_DEFINED
     VisionOS: PHOTON_FUSION_PHYSICS_ADDON_DEFINED
     WebGL: PHOTON_FUSION_PHYSICS_ADDON_DEFINED
     Windows Store Apps: PHOTON_FUSION_PHYSICS_ADDON_DEFINED
     XboxOne: PHOTON_FUSION_PHYSICS_ADDON_DEFINED
-    iPhone: PHOTON_FUSION_PHYSICS_ADDON_DEFINED
+    iPhone: OVRAVATAR_ASSERT_ENABLE_CONDITIONAL;PHOTON_FUSION_PHYSICS_ADDON_DEFINED
     tvOS: PHOTON_FUSION_PHYSICS_ADDON_DEFINED
   additionalCompilerArguments: {}
   platformArchitecture: {}
