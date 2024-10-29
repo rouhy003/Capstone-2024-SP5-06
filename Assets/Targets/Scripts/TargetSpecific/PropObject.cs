@@ -36,7 +36,8 @@ public class PropObject : NetworkBehaviour
     }
 
     // Executes whenever the object is struck by a projectile.
-    public void Knockdown(int player)
+    [Rpc(RpcSources.All, RpcTargets.All)]
+    public void KnockdownRPC(int player)
     {
         // Can only be ran through once per object
         if (!hasBeenStruck)

@@ -53,7 +53,7 @@ public class PhysxBall : NetworkBehaviour
         PropObject prop = collision.gameObject.GetComponent<PropObject>();
         if (prop != null)
         {
-            prop.Knockdown(player);
+            prop.KnockdownRPC(player);
         }
 
         // Plays the particle effect, if it exists.

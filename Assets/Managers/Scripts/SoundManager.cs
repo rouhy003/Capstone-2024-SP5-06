@@ -29,7 +29,8 @@ public class SoundManager : NetworkBehaviour
     }
 
     // Plays the scoring sound. Selects different clips depending on if the player gained or lost points.
-    public void PlayScoreSound(bool isPositive)
+    [Rpc(RpcSources.All, RpcTargets.All)]
+    public void PlayScoreSoundRPC(bool isPositive)
     {
         PlayPositiveOrNegativeSound(isPositive, m_scoreSounds[0], m_scoreSounds[1]);
     }

@@ -58,7 +58,7 @@ public class ScoreManager : NetworkBehaviour
         {
             player1Score -= amount;
         }
-        soundManager.PlayScoreSound(increase);
+        soundManager.PlayScoreSoundRPC(increase);
         ChangeP1Score();
     }
 
@@ -75,7 +75,7 @@ public class ScoreManager : NetworkBehaviour
         {
             player2Score -= amount;
         }
-        soundManager.PlayScoreSound(increase);
+        soundManager.PlayScoreSoundRPC(increase);
         ChangeP2Score();
     }
 
