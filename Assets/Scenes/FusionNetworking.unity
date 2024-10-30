@@ -2718,6 +2718,7 @@ MonoBehaviour:
   - {fileID: 4345866592698979647, guid: 444c0b2a615a00d448b001d77901d4aa, type: 3}
   - {fileID: 679194117442714353, guid: 49e2dbd2b2e188f4eae2fdbb7a3c61aa, type: 3}
   otherController: {fileID: 8478664957192686138}
+  mr: {fileID: 0}
   isJoined: 0
 --- !u!4 &134554180667482487
 Transform:
@@ -3148,15 +3149,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8232307172526531170, guid: 12b0a63b063d8114aaaaaa3a712501dc, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8232307172526531170, guid: 12b0a63b063d8114aaaaaa3a712501dc, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8232307172526531170, guid: 12b0a63b063d8114aaaaaa3a712501dc, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8232307172526531170, guid: 12b0a63b063d8114aaaaaa3a712501dc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -12127,6 +12128,7 @@ MonoBehaviour:
   - {fileID: 4345866592698979647, guid: 444c0b2a615a00d448b001d77901d4aa, type: 3}
   - {fileID: 679194117442714353, guid: 49e2dbd2b2e188f4eae2fdbb7a3c61aa, type: 3}
   otherController: {fileID: 119045227525257574}
+  mr: {fileID: 0}
   isJoined: 0
 --- !u!114 &8478664957192686139
 MonoBehaviour:
@@ -12951,12 +12953,12 @@ SceneRoots:
   - {fileID: 329716365}
   - {fileID: 1002061990}
   - {fileID: 1444439087}
-  - {fileID: 7202665572025692818}
+  - {fileID: 1667747241}
   - {fileID: 1052814994128675574}
+  - {fileID: 7202665572025692818}
   - {fileID: 498441074}
   - {fileID: 40494312}
   - {fileID: 4288587869556170927}
   - {fileID: 1153549901}
   - {fileID: 1188229337}
   - {fileID: 1861547037}
-  - {fileID: 1667747241}
