@@ -4,6 +4,7 @@ using Fusion;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Meta.XR.MRUtilityKit;
 
 public class GameManager : NetworkBehaviour
 {
@@ -14,6 +15,9 @@ public class GameManager : NetworkBehaviour
         Running,
         Ending
     }
+
+    [SerializeField] private RoomSpawner roomSpawner;
+    private bool roomSpawned = false;
 
     private static GameManager _singleton;
     [Networked] public GamePhase Phase { get; set; }
@@ -125,6 +129,10 @@ public class GameManager : NetworkBehaviour
     //Checks for player count and starts a pre-game countdown if the minimum player amount is reached.
     public void GameStarting()
     {
+        if (!roomSpawned)
+        {
+            roomSpawner.InitialiseRoom();
+        }
         if (!gameTimer.IsRunning)
         {
             gameTimer = TickTimer.CreateFromSeconds(Runner, preGameTime);

@@ -1,27 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Meta.XR.MRUtilityKit;
+using UnityEngine.SceneManagement;
 
 public class SpaceSyncSaving : MonoBehaviour
 {
     [SerializeField] protected GameObject VR_rig;
-    [SerializeField] protected GameObject room_scan;
-    protected bool roomScanFound = false;
 
-    void Update()
+    public void Start()
     {
-        if (roomScanFound == false)
-        {
-            if (FindObjectOfType<MRUKRoom>() != null)
-            {
-                roomScanFound = true;
-                room_scan = FindObjectOfType<MRUKRoom>().gameObject;
-                LoadData();
-            }
-        }
+        LoadData();
     }
-
     public void SaveData()
     {
         PlayerPrefs.SetFloat("XOffset", VR_rig.transform.position.x);
@@ -31,6 +20,7 @@ public class SpaceSyncSaving : MonoBehaviour
         PlayerPrefs.SetFloat("YRotation", VR_rig.transform.rotation.y);
         PlayerPrefs.SetFloat("ZRotation", VR_rig.transform.rotation.z);
         PlayerPrefs.SetFloat("WRotation", VR_rig.transform.rotation.w);
+        SceneManager.LoadScene(0);
     }
 
     public void LoadData()
@@ -40,8 +30,5 @@ public class SpaceSyncSaving : MonoBehaviour
         
         VR_rig.transform.position = position;
         VR_rig.transform.rotation = rotation;
-
-        room_scan.transform.position = position;
-        room_scan.transform.rotation = rotation;
     }
 }
